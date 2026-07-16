@@ -1,0 +1,108 @@
+.docs-page {
+	background: #F2F4FE;
+	padding: 60px 0 80px;
+}
+
+.docs-page__title {
+	font-size: 40px;
+	font-weight: 500;
+	line-height: 1.4;
+	color: #2A272B;
+}
+
+.docs-page__content {
+	margin-top: 40px;
+}
+
+.editor-text p {
+	margin: 0 0 20px;
+	font-size: 20px;
+	font-weight: 400;
+	line-height: 1.4;
+	color: #2A272B;
+}
+
+.editor-text p:last-child {
+	margin-bottom: 0;
+}
+
+.editor-text h2 {
+	margin: 40px 0 20px;
+	font-size: 28px;
+	font-weight: 500;
+	line-height: 1.4;
+	color: #2A272B;
+}
+
+.editor-text h2:first-child {
+	margin-top: 0;
+}
+
+.editor-text h3 {
+	margin: 32px 0 16px;
+	font-size: 24px;
+	font-weight: 500;
+	line-height: 1.4;
+	color: #2A272B;
+}
+
+.editor-text ul,
+.editor-text ol {
+	margin: 0 0 20px;
+	padding-left: 24px;
+	font-size: 20px;
+	font-weight: 400;
+	line-height: 1.4;
+	color: #2A272B;
+}
+
+.editor-text li {
+	margin-bottom: 8px;
+}
+
+.editor-text li:last-child {
+	margin-bottom: 0;
+}
+
+.editor-text a {
+	color: #2E5BFF;
+	text-decoration: underline;
+	transition: color 0.2s;
+}
+
+.editor-text a:hover {
+	color: #1A3FD9;
+}
+
+.editor-text strong {
+	font-weight: 500;
+}
+
+@media (max-width: 768px) {
+	.docs-page {
+		padding: 40px 0 60px;
+	}
+
+	.docs-page__title {
+		font-size: 28px;
+	}
+
+	.docs-page__content {
+		margin-top: 24px;
+	}
+
+	.editor-text p,
+	.editor-text ul,
+	.editor-text ol {
+		font-size: 16px;
+	}
+
+	.editor-text h2 {
+		margin-top: 32px;
+		font-size: 22px;
+	}
+
+	.editor-text h3 {
+		font-size: 20px;
+	}
+}

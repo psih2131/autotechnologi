@@ -1,0 +1,25 @@
+@import "./vars";
+@import "./fonts";
+// @import "./mixins";
+
+@import "./sourse";
+
+/* sections */
+
+@import "./header";
+
+@import "./footer";
+
+// /* components */
+
+
+// /* pages */
+@import "home-page";
+@import "auto-accreditation";
+@import "news";
+@import "documentation";
+@import "contacts";
+@import "programs";
+@import "program-page";
+@import "about-page";
+@import "docs-page";

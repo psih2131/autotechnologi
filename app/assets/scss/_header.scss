@@ -1,0 +1,157 @@
+.header {
+	background: #fff;
+}
+
+.header__top {
+	padding: 23px 0;
+}
+
+.header__top-inner {
+	display: flex;
+	align-items: center;
+	gap: 40px;
+}
+
+.header__logo {
+	flex-shrink: 0;
+	display: block;
+	width: 319px;
+	height: 73px;
+}
+
+.header__logo img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+}
+
+.header__search {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	flex: 1;
+	max-width: 609px;
+	height: 61px;
+	padding: 15px 25px 15px 16px;
+	background: #E6EAF2;
+	border-radius: 10px;
+	border: none;
+}
+
+.header__search-icon {
+	flex-shrink: 0;
+}
+
+.header__search-input {
+	flex: 1;
+	border: none;
+	background: transparent;
+	font-size: 15px;
+	font-weight: 400;
+	line-height: 1;
+	color: #2A272B;
+}
+
+.header__search-input::placeholder {
+	color: #7E7F81;
+}
+
+.header__contacts {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	flex-shrink: 0;
+	width: 216px;
+}
+
+.header__contact-item {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	font-size: 15px;
+	font-weight: 400;
+	line-height: 1.4;
+	color: #2A272B;
+}
+
+.header__contact-item svg {
+	flex-shrink: 0;
+}
+
+.header__contact-item--email span {
+	text-decoration: underline;
+}
+
+.header__socials {
+	display: flex;
+	align-items: center;
+	gap: 15px;
+	flex-shrink: 0;
+	margin-left: auto;
+}
+
+.header__social-link {
+	display: block;
+	flex-shrink: 0;
+	width: 40px;
+	height: 40px;
+}
+
+.header__social-link img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+}
+
+.header__bottom {
+	padding: 11px 0 33px;
+}
+
+.header__bottom-inner {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.header__nav {
+	display: flex;
+	align-items: center;
+	gap: 35px;
+}
+
+.header__nav-link {
+	font-size: 18px;
+	font-weight: 400;
+	line-height: 1;
+	color: #7E7F81;
+	white-space: nowrap;
+	transition: color 0.2s;
+}
+
+.header__nav-link:hover {
+	color: #2A272B;
+}
+
+.header__consult-btn {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 12px;
+	flex-shrink: 0;
+	width: 227px;
+	height: 61px;
+	padding: 15px 16px;
+	background: #E1D6B6;
+	border-radius: 10px;
+	font-size: 15px;
+	font-weight: 400;
+	line-height: 1;
+	color: #2A272B;
+	transition: opacity 0.2s;
+}
+
+.header__consult-btn:hover {
+	opacity: 0.85;
+}
