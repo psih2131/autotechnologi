@@ -38,8 +38,12 @@
 	color: #fff;
 }
 
-.footer__contact-row svg {
+.footer__contact-row svg,
+.footer__contact-icon {
 	flex-shrink: 0;
+	width: 24px;
+	height: 24px;
+	object-fit: contain;
 }
 
 .footer__contact-row--email span {
@@ -159,6 +163,8 @@
 
 
 .footer__legal {
+	white-space: pre-line;
+
 	
 	font-size: 15px;
 	font-weight: 300;
