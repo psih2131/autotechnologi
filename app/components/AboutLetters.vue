@@ -1,11 +1,11 @@
 <template>
   <section class="about-letters-section">
     <div class="container">
-      <h2 class="about-letters__title">Благодарственные письма от компаний</h2>
+      <h2 v-if="title" class="about-letters__title">{{ title }}</h2>
 
-      <div class="about-letters__grid">
+      <div v-if="images.length" class="about-letters__grid">
         <a
-          v-for="(letter, idx) in letters"
+          v-for="(letter, idx) in images"
           :key="idx"
           :href="letter"
           data-fancybox="about-letters"
@@ -30,12 +30,13 @@
 import { Fancybox } from '@fancyapps/ui'
 import '@fancyapps/ui/dist/fancybox/fancybox.css'
 
-import sl1 from '~/assets/images/docs/sl1.png'
-import sl2 from '~/assets/images/docs/sl2.png'
-import sl3 from '~/assets/images/docs/sl3.png'
-import sl4 from '~/assets/images/docs/sl4.png'
-
-const letters = [sl1, sl2, sl3, sl4]
+const props = defineProps({
+  title: { type: String, default: '' },
+  images: {
+    type: Array,
+    default: () => [],
+  },
+})
 
 const initFancybox = () => {
   Fancybox.unbind('[data-fancybox="about-letters"]')
@@ -47,6 +48,13 @@ const initFancybox = () => {
 onMounted(() => {
   initFancybox()
 })
+
+watch(
+  () => props.images,
+  () => {
+    nextTick(() => initFancybox())
+  },
+)
 
 onUnmounted(() => {
   Fancybox.unbind('[data-fancybox="about-letters"]')

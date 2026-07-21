@@ -4,19 +4,19 @@
       <nav class="documents-section__breadcrumbs">
         <NuxtLink to="/">Главная</NuxtLink>
         <span class="documents-section__breadcrumbs-sep">/</span>
-        <span>Документация</span>
+        <span v-if="title">{{ title }}</span>
       </nav>
 
-      <h1 class="documents-section__heading">Аккредитации учебного центра</h1>
+      <h1 v-if="title" class="documents-section__heading">{{ title }}</h1>
 
-      <p class="documents-section__intro">
-        Учебный центр «Автотехнологии» осуществляет обучение по программам дополнительного профессионального образования и специализированным направлениям подготовки в соответствии с действующими требованиями законодательства. На странице представлены основные аккредитации, лицензии и разрешительные документы учебного центра.
+      <p v-if="subtitle" class="documents-section__intro">
+        {{ subtitle }}
       </p>
 
-      <div class="documents-section__grid">
+      <div v-if="documents.length" class="documents-section__grid">
         <a
-          v-for="doc in documents"
-          :key="doc.title"
+          v-for="(doc, i) in documents"
+          :key="`doc-${i}`"
           :href="doc.image"
           data-fancybox="documents"
           :data-caption="doc.title"
@@ -32,7 +32,7 @@
               </svg>
             </span>
           </div>
-          <h3 class="documents-section__card-title">{{ doc.title }}</h3>
+          <h3 v-if="doc.title" class="documents-section__card-title">{{ doc.title }}</h3>
         </a>
       </div>
     </div>
@@ -43,31 +43,37 @@
 import { Fancybox } from '@fancyapps/ui'
 import '@fancyapps/ui/dist/fancybox/fancybox.css'
 
-import doc1 from '~/assets/images/docs/doc1.png'
-import doc2 from '~/assets/images/docs/doc2.png'
-import doc3 from '~/assets/images/docs/doc3.png'
+const props = defineProps({
+  title: {
+    type: String,
+    default: '',
+  },
+  subtitle: {
+    type: String,
+    default: '',
+  },
+  documents: {
+    type: Array,
+    default: () => [],
+  },
+})
 
-const documents = [
-  {
-    image: doc1,
-    title: 'Лицензия на образовательную деятельность',
-  },
-  {
-    image: doc2,
-    title: 'Аккредитация по охране труда',
-  },
-  {
-    image: doc3,
-    title: 'Удостоверение об утверждении курсов по ДОПОГ',
-  },
-]
-
-onMounted(() => {
+const initFancybox = () => {
+  Fancybox.unbind('[data-fancybox="documents"]')
+  if (!props.documents.length) return
   Fancybox.bind('[data-fancybox="documents"]', {
     animated: true,
     hideScrollbar: true,
   })
+}
+
+onMounted(() => {
+  nextTick(() => initFancybox())
 })
+
+watch(() => props.documents, () => {
+  nextTick(() => initFancybox())
+}, { deep: true })
 
 onUnmounted(() => {
   Fancybox.unbind('[data-fancybox="documents"]')

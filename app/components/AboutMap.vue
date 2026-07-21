@@ -15,9 +15,12 @@
 
         <div class="about-map__branches">
           <div class="about-map__branches-inner">
-            <h2 class="about-map__branches-title">Наши<br>представительства</h2>
+            <h2
+              v-if="title"
+              class="about-map__branches-title"
+              v-html="title"
+            ></h2>
 
-          
             <div class="about-map__branches-list">
               <div
                 v-for="(branch, idx) in branches"
@@ -43,9 +46,11 @@
 </template>
 
 <script setup>
-const branches = [
-  { city: 'Москва', address: 'ул. Мневники, 7к2' },
-  { city: 'Санкт-Петербург', address: 'пр. Культуры, 31к1' },
-  { city: 'Курган', address: 'ул. Володарского, 65, оф. 414' },
-]
+defineProps({
+  title: { type: String, default: '' },
+  branches: {
+    type: Array,
+    default: () => [],
+  },
+})
 </script>

@@ -80,42 +80,19 @@
           </nav>
         </div>
 
-        <div class="footer__programs">
+        <div v-if="programColumns.length" class="footer__programs">
           <h3 class="footer__links-title">Программы обучения</h3>
           <div class="footer__programs-grid">
-            <ul class="footer__programs-col">
-              <li><a href="#">БДД</a></li>
-              <li><a href="#">Библиотечное дело</a></li>
-              <li><a href="#">Гражданская оборона</a></li>
-              <li><a href="#">Госзакупки</a></li>
-              <li><a href="#">Доступная среда</a></li>
-              <li><a href="#">Допуск в СРО</a></li>
-              <li><a href="#">Защита персональных данных</a></li>
-              <li><a href="#">Квалификация работников</a></li>
-              <li><a href="#">Компьютерные программы</a></li>
-              <li><a href="#">Лифтовое оборудование</a></li>
-            </ul>
-            <ul class="footer__programs-col">
-              <li><a href="#">Метрология</a></li>
-              <li><a href="#">Обучение нефтяников</a></li>
-              <li><a href="#">Охранная деятельность</a></li>
-              <li><a href="#">Охрана труда</a></li>
-              <li><a href="#">Педагогика и психология</a></li>
-              <li><a href="#">Пожарная безопасность</a></li>
-              <li><a href="#">Промышленная безопасность</a></li>
-              <li><a href="#">Противодействие коррупции</a></li>
-              <li><a href="#">Работа на высоте</a></li>
-              <li><a href="#">Радиационная безопасность</a></li>
-            </ul>
-            <ul class="footer__programs-col">
-              <li><a href="#">Социальная работа</a></li>
-              <li><a href="#">Техносферная безопасность</a></li>
-              <li><a href="#">Транспортная безопасность</a></li>
-              <li><a href="#">Управление персоналом</a></li>
-              <li><a href="#">Экологическая безопасность</a></li>
-              <li><a href="#">Экономика и бухгалтерский учет</a></li>
-              <li><a href="#">Электробезопасность</a></li>
-              <li><a href="#">Энергетическая безопасность</a></li>
+            <ul
+              v-for="(column, colIdx) in programColumns"
+              :key="colIdx"
+              class="footer__programs-col"
+            >
+              <li v-for="item in column" :key="item.slug">
+                <NuxtLink :to="`/programs/categories/${item.slug}`">
+                  {{ item.title }}
+                </NuxtLink>
+              </li>
             </ul>
           </div>
         </div>
@@ -151,4 +128,43 @@ import footerLogo from '~/assets/images/footer-logo.png'
 import footerSocial1 from '~/assets/images/footer-social-1.png'
 import footerSocial2 from '~/assets/images/footer-social-2.png'
 import footerSocial3 from '~/assets/images/footer-social-3.png'
+
+const config = useRuntimeConfig()
+const COLUMN_COUNT = 3
+
+const { data: categoriesData } = await useAsyncData('footer-programs-categories', async () => {
+  const params = new URLSearchParams({
+    'pagination[pageSize]': '100',
+    sort: 'title:asc',
+  })
+
+  const response = await $fetch(`/api/programs-categories?${params}`, {
+    baseURL: config.public.apiUrl,
+  }).catch(() => null)
+
+  return response?.data || []
+})
+
+const programs = computed(() =>
+  (categoriesData.value || [])
+    .filter((item) => item?.slug && item?.title)
+    .map((item) => ({
+      title: item.title,
+      slug: item.slug,
+    })),
+)
+
+const programColumns = computed(() => {
+  const items = programs.value
+  if (!items.length) return []
+
+  const columns = Array.from({ length: COLUMN_COUNT }, () => [])
+  const perColumn = Math.ceil(items.length / COLUMN_COUNT)
+
+  items.forEach((item, index) => {
+    columns[Math.min(Math.floor(index / perColumn), COLUMN_COUNT - 1)].push(item)
+  })
+
+  return columns.filter((column) => column.length)
+})
 </script>

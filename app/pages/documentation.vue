@@ -5,90 +5,40 @@
         <nav class="documentation-section__breadcrumbs">
           <NuxtLink to="/">Главная</NuxtLink>
           <span class="documentation-section__breadcrumbs-sep">/</span>
-          <span>Документация</span>
+          <span v-if="pageTitle">{{ pageTitle }}</span>
         </nav>
 
-        <h1 class="documentation-section__title">Документация</h1>
+        <h1 v-if="pageTitle" class="documentation-section__title">{{ pageTitle }}</h1>
 
-        <ul class="documentation-section__list">
-          <li>
-            <a href="#">Лицензия учебного центра «Автотехнологии»</a>
-          </li>
-          <li>
-            <a href="#">Политика в отношении обработки персональных данных</a>
-          </li>
-          <li>
-            <a href="#">Положение о порядке текущего контроля успеваемости, промежуточной и итоговой аттестации обучающихся</a>
-          </li>
-          <li>
-            <a href="#">Устав ООО «Автотехнологии»</a>
-          </li>
-          <li>
-            <a href="#">Положение о порядке приёма, перевода, отчисления и восстановления обучающихся</a>
-          </li>
-          <li>
-            <a href="#">Правила внутреннего распорядка обучающихся</a>
-          </li>
-          <li>
-            <a href="#">Правила внутреннего трудового распорядка</a>
-          </li>
-          <li>
-            <a href="#">Коллективный договор</a>
-          </li>
-          <li>
-            <a href="#">Отчёт о результатах самообследования</a>
-          </li>
-          <li>
-            <a href="#">Правила оказания платных образовательных услуг</a>
-          </li>
-          <li>
-            <a href="#">Стоимость обучения в учебном центре «Автотехнологии»</a>
-          </li>
-          <li>
-            <a href="#">Основные образовательные программы</a>
-          </li>
-          <li>
-            <a href="#">Руководство. Педагогический состав</a>
-          </li>
-          <li>
-            <a href="#">Материально-техническое обеспечение и оснащённость образовательного процесса</a>
+        <ul v-if="docsList.length" class="documentation-section__list">
+          <li v-for="(doc, i) in docsList" :key="`doc-${i}`">
+            <a v-if="doc.href" :href="doc.href" target="_blank" rel="noopener">{{ doc.title }}</a>
+            <span v-else>{{ doc.title }}</span>
           </li>
         </ul>
 
-        <div class="documentation-section__license">
+        <div
+          v-if="hasLicenseBlock"
+          class="documentation-section__license"
+        >
           <div class="documentation-section__license-content">
-            <h2 class="documentation-section__license-title">Лицензия</h2>
+            <h2 v-if="licenceTitle" class="documentation-section__license-title">{{ licenceTitle }}</h2>
 
-            <div class="documentation-section__license-text">
-              <div class="documentation-section__license-text-item-quote">
-                Учебный центр «Автотехнологии» осуществляет образовательную деятельность на основании лицензии
-                на право ведения образовательной деятельности № 9149 от 06.07.2017, выданной Министерством
-                образования Челябинской области.
+            <div v-if="licenceSubtitle || licenceParagraphs.length" class="documentation-section__license-text">
+              <div v-if="licenceSubtitle" class="documentation-section__license-text-item-quote">
+                {{ licenceSubtitle }}
               </div>
-              <p>
-                Лицензия даёт право на осуществление образовательной деятельности по программам профессионального
-                обучения, программам дополнительного профессионального образования и дополнительным
-                общеразвивающим программам.
-              </p>
-              <p>
-                Учебный центр «Автотехнологии» включён в перечень организаций, осуществляющих деятельность
-                по профессиональному обучению и дополнительному профессиональному образованию работников
-                организаций, поднадзорных Роструду.
-              </p>
-              <p>
-                Проверить лицензию можно на официальном сайте Федеральной службы по надзору в сфере образования
-                и науки (Рособрнадзор) в разделе «Реестр лицензий на осуществление образовательной деятельности»,
-                указав ИНН организации: 4501171491.
+              <p v-for="(paragraph, i) in licenceParagraphs" :key="`licence-p-${i}`">
+                {{ paragraph }}
               </p>
             </div>
 
-            <p class="documentation-section__license-note">
-              Информация, размещённая на данной странице, носит справочный характер. Для получения официальных
-              документов обращайтесь в учебный центр.
+            <p v-if="licenceDownText" class="documentation-section__license-note">
+              {{ licenceDownText }}
             </p>
           </div>
 
-          <div class="documentation-section__slider">
+          <div v-if="slides.length" class="documentation-section__slider">
             <button
               type="button"
               class="documentation-section__slider-prev"
@@ -142,37 +92,104 @@
       </div>
     </section>
 
-    <AccreditationBanner />
+    <AccreditationBanner
+      v-if="banner"
+      :title="banner.title || ''"
+      :description="banner.text || ''"
+      :image="mediaUrl(banner.image)"
+    />
   </main>
 </template>
 
-<script setup lang="ts">
+<script setup>
 import { Fancybox } from '@fancyapps/ui'
 import '@fancyapps/ui/dist/fancybox/fancybox.css'
 
-import doc1 from '~/assets/images/docs/doc1.png'
-import doc2 from '~/assets/images/docs/doc2.png'
-import doc3 from '~/assets/images/docs/doc3.png'
+const config = useRuntimeConfig()
+const mediaUrl = useStrapiMedia()
+
+const query = new URLSearchParams({
+  'populate[docs_list][populate]': 'file',
+  'populate[images_for_slider]': 'true',
+  'populate[banner_section][populate]': 'image',
+  'populate[Seo][populate][shareImage]': 'true',
+  'populate[Seo][populate][twitterImage]': 'true',
+}).toString()
+
+const { data } = await useAsyncData('page-document', () =>
+  $fetch(`/api/page-document?${query}`, { baseURL: config.public.apiUrl }).catch(() => null),
+)
+
+const page = computed(() => data.value?.data ?? {})
+
+const pageTitle = computed(() => page.value.title_docs || '')
+const licenceTitle = computed(() => page.value.licence_title || '')
+const licenceSubtitle = computed(() => page.value.licence_subtitle || '')
+const licenceDownText = computed(() => page.value.licence_down_text || '')
+
+const licenceParagraphs = computed(() => {
+  const text = page.value.licence_text
+  if (!text) return []
+  return text.split(/\n+/).map((p) => p.trim()).filter(Boolean)
+})
+
+const docsList = computed(() => {
+  if (!page.value.docs_list?.length) return []
+  return page.value.docs_list.map((item) => {
+    const file = Array.isArray(item.file) ? item.file[0] : item.file
+    return {
+      title: item.title || '',
+      href: mediaUrl(file) || '',
+    }
+  }).filter((item) => item.title)
+})
+
+const slides = computed(() => {
+  if (!page.value.images_for_slider?.length) return []
+  return page.value.images_for_slider
+    .map((img) => ({
+      image: mediaUrl(img),
+      title: img.alternativeText || img.name || '',
+    }))
+    .filter((slide) => slide.image)
+})
+
+const hasLicenseBlock = computed(() =>
+  Boolean(
+    licenceTitle.value
+    || licenceSubtitle.value
+    || licenceParagraphs.value.length
+    || licenceDownText.value
+    || slides.value.length,
+  ),
+)
+
+const banner = computed(() => page.value.banner_section ?? null)
+const seo = computed(() => page.value.Seo ?? null)
+
+useSeoMeta({
+  title: () => seo.value?.metaTitle || undefined,
+  description: () => seo.value?.metaDescription || undefined,
+  keywords: () => seo.value?.keywords || undefined,
+  robots: () => seo.value?.metaRobots || undefined,
+  ogTitle: () => seo.value?.ogTitle || seo.value?.metaTitle || undefined,
+  ogDescription: () => seo.value?.ogDescription || seo.value?.metaDescription || undefined,
+  ogType: () => seo.value?.ogType || undefined,
+  ogUrl: () => seo.value?.ogUrl || undefined,
+  ogImage: () => mediaUrl(seo.value?.shareImage) || undefined,
+  twitterCard: () => seo.value?.twitterCard || undefined,
+  twitterTitle: () => seo.value?.twitterTitle || seo.value?.ogTitle || seo.value?.metaTitle || undefined,
+  twitterDescription: () => seo.value?.twitterDescription || seo.value?.ogDescription || seo.value?.metaDescription || undefined,
+  twitterImage: () => mediaUrl(seo.value?.twitterImage) || mediaUrl(seo.value?.shareImage) || undefined,
+})
 
 useHead({
-  title: 'Документация — Автотехнологии',
+  link: () => (seo.value?.canonicalUrl
+    ? [{ rel: 'canonical', href: seo.value.canonicalUrl }]
+    : []),
 })
 
 const containerRef = ref(null)
-const slides = ref([
-  {
-    image: doc1,
-    title: 'Лицензия на образовательную деятельность',
-  },
-  {
-    image: doc2,
-    title: 'Аккредитация по охране труда',
-  },
-  {
-    image: doc3,
-    title: 'Удостоверение об утверждении курсов по ДОПОГ',
-  },
-])
 
 const swiper = useSwiper(containerRef, {
   effect: 'slide',
@@ -195,6 +212,15 @@ watch(containerRef, (el) => {
       nextTick(() => initFancybox())
     })
   }
+})
+
+watch(slides, () => {
+  nextTick(() => {
+    if (containerRef.value) {
+      swiper.reInitialize()
+      nextTick(() => initFancybox())
+    }
+  })
 })
 
 onUnmounted(() => {

@@ -4,8 +4,8 @@
       <div class="banner-section__inner">
         <div class="banner-section__content">
           <div class="banner-section__text">
-            <h2 class="banner-section__title">{{ title }}</h2>
-            <p class="banner-section__description">
+            <h2 v-if="title" class="banner-section__title">{{ title }}</h2>
+            <p v-if="description" class="banner-section__description">
               {{ description }}
             </p>
           </div>
@@ -28,8 +28,8 @@
           </form>
         </div>
 
-        <div class="banner-section__image-wrap">
-          <img src="~/assets/images/banner-img-1.jpg" alt="" class="banner-section__image">
+        <div v-if="resolvedImage" class="banner-section__image-wrap">
+          <img :src="resolvedImage" :alt="title || ''" class="banner-section__image">
           <div class="banner-section__image-gradient"></div>
         </div>
       </div>
@@ -38,7 +38,9 @@
 </template>
 
 <script setup>
-defineProps({
+import bannerFallback from '~/assets/images/banner-img-1.jpg'
+
+const props = defineProps({
   title: {
     type: String,
     default: 'Остались вопросы?',
@@ -47,5 +49,12 @@ defineProps({
     type: String,
     default: 'Оставьте заявку, наши специалисты проконсультируют вас по программам обучения, документам, стоимости и формату обучения, а также помогут подобрать подходящий курс.',
   },
+  // undefined = другие страницы без пропа → локальный фолбэк; '' = с CMS без картинки → не показываем
+  image: {
+    type: String,
+    default: undefined,
+  },
 })
+
+const resolvedImage = computed(() => props.image ?? bannerFallback)
 </script>

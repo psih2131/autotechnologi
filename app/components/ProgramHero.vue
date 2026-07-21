@@ -1,8 +1,8 @@
 <template>
   <section class="program-hero">
     <div class="program-hero__bg" aria-hidden="true">
-      <img :src="heroImgLeft" alt="" class="program-hero__img program-hero__img--left">
-      <img :src="heroImgRight" alt="" class="program-hero__img program-hero__img--right">
+      <img :src="resolvedHeroLeft" alt="" class="program-hero__img program-hero__img--left">
+      <img :src="resolvedHeroRight" alt="" class="program-hero__img program-hero__img--right">
       <div class="program-hero__overlay"></div>
     </div>
 
@@ -11,25 +11,33 @@
         <NuxtLink to="/">Главная</NuxtLink>
         <span class="program-hero__breadcrumbs-sep">/</span>
         <NuxtLink to="/programs">Каталог курсов</NuxtLink>
-        <span class="program-hero__breadcrumbs-sep">/</span>
-        <span>БДД</span>
-        <span class="program-hero__breadcrumbs-sep">/</span>
-        <span>Безопасное вождение</span>
+        <template v-if="categoryTitle">
+          <span class="program-hero__breadcrumbs-sep">/</span>
+          <NuxtLink
+            v-if="categorySlug"
+            :to="`/programs/categories/${categorySlug}`"
+          >
+            {{ categoryTitle }}
+          </NuxtLink>
+          <span v-else>{{ categoryTitle }}</span>
+        </template>
+        <template v-if="title">
+          <span class="program-hero__breadcrumbs-sep">/</span>
+          <span>{{ title }}</span>
+        </template>
       </nav>
 
       <div class="program-hero__body">
         <div class="program-hero__content">
           <div class="program-hero__title-block">
-            <h1 class="program-hero__title">Безопасное вождение</h1>
-            <p class="program-hero__description">
-              Программа направлена на повышение уровня безопасности при управлении транспортными средствами,
-              снижение риска дорожно-транспортных происшествий и формирование навыков безопасного поведения
-              в различных дорожных условиях.
+            <h1 v-if="title" class="program-hero__title">{{ title }}</h1>
+            <p v-if="description" class="program-hero__description">
+              {{ description }}
             </p>
           </div>
 
-          <div class="program-hero__meta">
-            <div class="program-hero__meta-item">
+          <div v-if="typeTitle || duration || format" class="program-hero__meta">
+            <div v-if="typeTitle" class="program-hero__meta-item">
               <div class="program-hero__meta-head">
                 <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M11.25 17.0625H6.75C2.6775 17.0625 0.9375 15.3225 0.9375 11.25V6.75C0.9375 2.6775 2.6775 0.9375 6.75 0.9375H10.5C10.8075 0.9375 11.0625 1.1925 11.0625 1.5C11.0625 1.8075 10.8075 2.0625 10.5 2.0625H6.75C3.2925 2.0625 2.0625 3.2925 2.0625 6.75V11.25C2.0625 14.7075 3.2925 15.9375 6.75 15.9375H11.25C14.7075 15.9375 15.9375 14.7075 15.9375 11.25V7.5C15.9375 7.1925 16.1925 6.9375 16.5 6.9375C16.8075 6.9375 17.0625 7.1925 17.0625 7.5V11.25C17.0625 15.3225 15.3225 17.0625 11.25 17.0625Z" fill="white"/>
@@ -40,12 +48,12 @@
 
                 <span>Тип обучения</span>
               </div>
-              <span class="program-hero__meta-value">Повышение квалификации</span>
+              <span class="program-hero__meta-value">{{ typeTitle }}</span>
             </div>
 
-            <div class="program-hero__meta-divider" aria-hidden="true"></div>
+            <div v-if="typeTitle && duration" class="program-hero__meta-divider" aria-hidden="true"></div>
 
-            <div class="program-hero__meta-item">
+            <div v-if="duration" class="program-hero__meta-item">
               <div class="program-hero__meta-head">
                 <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M9 17.0625C4.5525 17.0625 0.9375 13.4475 0.9375 9C0.9375 4.5525 4.5525 0.9375 9 0.9375C13.4475 0.9375 17.0625 4.5525 17.0625 9C17.0625 13.4475 13.4475 17.0625 9 17.0625ZM9 2.0625C5.175 2.0625 2.0625 5.175 2.0625 9C2.0625 12.825 5.175 15.9375 9 15.9375C12.825 15.9375 15.9375 12.825 15.9375 9C15.9375 5.175 12.825 2.0625 9 2.0625Z" fill="white"/>
@@ -54,12 +62,12 @@
 
                 <span>Срок обучения</span>
               </div>
-              <span class="program-hero__meta-value">16 часов</span>
+              <span class="program-hero__meta-value">{{ duration }}</span>
             </div>
 
-            <div class="program-hero__meta-divider" aria-hidden="true"></div>
+            <div v-if="(typeTitle || duration) && format" class="program-hero__meta-divider" aria-hidden="true"></div>
 
-            <div class="program-hero__meta-item">
+            <div v-if="format" class="program-hero__meta-item">
               <div class="program-hero__meta-head">
                 <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M9 16.5596C8.775 16.5596 8.55 16.5071 8.3625 16.4021C6.96 15.6371 4.4925 14.8271 2.9475 14.6246L2.73 14.5946C1.7475 14.4746 0.9375 13.5521 0.9375 12.5546V3.49464C0.9375 2.90214 1.17 2.36214 1.5975 1.97214C2.025 1.58214 2.58 1.39464 3.165 1.44714C4.815 1.57464 7.305 2.39964 8.715 3.28464L8.895 3.38964C8.9475 3.41964 9.06 3.41964 9.105 3.39714L9.225 3.32214C10.635 2.43714 13.125 1.59714 14.7825 1.45464C14.7975 1.45464 14.8575 1.45464 14.8725 1.45464C15.42 1.40214 15.9825 1.59714 16.4025 1.98714C16.83 2.37714 17.0625 2.91714 17.0625 3.50964V12.5621C17.0625 13.5671 16.2525 14.4821 15.2625 14.6021L15.015 14.6321C13.47 14.8346 10.995 15.6521 9.6225 16.4096C9.4425 16.5146 9.225 16.5596 9 16.5596ZM2.985 2.56464C2.745 2.56464 2.5275 2.64714 2.355 2.80464C2.1675 2.97714 2.0625 3.22464 2.0625 3.49464V12.5546C2.0625 12.9971 2.445 13.4246 2.8725 13.4846L3.0975 13.5146C4.785 13.7396 7.3725 14.5871 8.8725 15.4046C8.94 15.4346 9.0375 15.4421 9.075 15.4271C10.575 14.5946 13.1775 13.7396 14.8725 13.5146L15.1275 13.4846C15.555 13.4321 15.9375 12.9971 15.9375 12.5546V3.50214C15.9375 3.22464 15.8325 2.98464 15.645 2.80464C15.45 2.63214 15.2025 2.54964 14.925 2.56464C14.91 2.56464 14.85 2.56464 14.835 2.56464C13.4025 2.69214 11.0925 3.46464 9.8325 4.25214L9.7125 4.33464C9.3 4.58964 8.715 4.58964 8.3175 4.34214L8.1375 4.23714C6.855 3.44964 4.545 2.68464 3.075 2.56464C3.045 2.56464 3.015 2.56464 2.985 2.56464Z" fill="white"/>
@@ -70,13 +78,13 @@
 
                 <span>Формат обучения</span>
               </div>
-              <span class="program-hero__meta-value">Дистанционно</span>
+              <span class="program-hero__meta-value">{{ format }}</span>
             </div>
           </div>
 
-          <div class="program-hero__price-row">
-            <p class="program-hero__price">Стоимость: <strong>3000 ₽</strong></p>
-            <span class="program-hero__dolyame">
+          <div v-if="price || paymentInShares" class="program-hero__price-row">
+            <p v-if="price" class="program-hero__price">Стоимость: <strong>{{ price }}</strong></p>
+            <span v-if="paymentInShares" class="program-hero__dolyame">
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
               <rect width="16" height="16" rx="8" fill="white"/>
               <g clip-path="url(#clip0_60_2147)">
@@ -129,6 +137,23 @@
 </template>
 
 <script setup>
-import heroImgLeft from '~/assets/images/program-hero-sec-img-1.png'
-import heroImgRight from '~/assets/images/program-hero-sec-img-2.png'
+import heroImgLeftFallback from '~/assets/images/program-hero-sec-img-1.png'
+import heroImgRightFallback from '~/assets/images/program-hero-sec-img-2.png'
+
+const props = defineProps({
+  title: { type: String, default: '' },
+  description: { type: String, default: '' },
+  categoryTitle: { type: String, default: '' },
+  categorySlug: { type: String, default: '' },
+  typeTitle: { type: String, default: '' },
+  duration: { type: String, default: '' },
+  format: { type: String, default: '' },
+  price: { type: String, default: '' },
+  paymentInShares: { type: Boolean, default: false },
+  heroImgLeft: { type: String, default: '' },
+  heroImgRight: { type: String, default: '' },
+})
+
+const resolvedHeroLeft = computed(() => props.heroImgLeft || heroImgLeftFallback)
+const resolvedHeroRight = computed(() => props.heroImgRight || heroImgRightFallback)
 </script>

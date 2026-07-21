@@ -77,6 +77,13 @@
 	flex-shrink: 0;
 }
 
+.contacts-section__row-icon {
+	flex-shrink: 0;
+	width: 24px;
+	height: 24px;
+	object-fit: contain;
+}
+
 .contacts-section__row--email span {
 	text-decoration: underline;
 }

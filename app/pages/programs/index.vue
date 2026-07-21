@@ -6,149 +6,51 @@
         <nav class="programs-main__breadcrumbs">
               <NuxtLink to="/">Главная</NuxtLink>
               <span class="programs-main__breadcrumbs-sep">/</span>
-              <span>Все курсы</span>
+              <span>{{ pageTitle || 'Все курсы' }}</span>
             </nav>
 
         <div class="programs-section__layout">
           <aside class="programs-sidebar">
-            <div class="programs-sidebar__nav-claster">
+            <div v-if="popularCategories.length" class="programs-sidebar__nav-claster">
               <h2 class="programs-sidebar__nav-claster-title">Популярные направления подготовки</h2>
               <nav class="programs-sidebar__nav-claster-list">
                 <ul class="programs-sidebar__nav-claster-list-items">
-                  <li class="programs-sidebar__nav-claster-list-item ">
-                    <a href="#" class="programs-sidebar__nav-claster-list-link active">
+                  <li
+                    v-for="category in popularCategories"
+                    :key="category.slug"
+                    class="programs-sidebar__nav-claster-list-item"
+                  >
+                    <NuxtLink
+                      :to="`/programs/categories/${category.slug}`"
+                      class="programs-sidebar__nav-claster-list-link"
+                    >
                       <span class="programs-sidebar__link-icon">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M4 4C4 2.34315 5.34315 1 7 1H17C18.6569 1 20 2.34315 20 4V22C20 22.3905 19.7727 22.7453 19.4179 22.9085C19.0631 23.0717 18.6457 23.0134 18.3492 22.7593L12 17.3171L5.65079 22.7593C5.35428 23.0134 4.93694 23.0717 4.58214 22.9085C4.22734 22.7453 4 22.3905 4 22V4ZM7 3C6.44772 3 6 3.44772 6 4V19.8258L11.3492 15.2407C11.7237 14.9198 12.2763 14.9198 12.6508 15.2407L18 19.8258V4C18 3.44772 17.5523 3 17 3H7Z" fill="#7E7F81"/>
+                          <path d="M4 4C4 2.34315 5.34315 1 7 1H17C18.6569 1 20 2.34315 20 4V22C20 22.3905 19.7727 22.7453 19.4179 22.9085C19.0631 23.0717 18.6457 23.0134 18.3492 22.7593L12 17.3171L5.65079 22.7593C5.35428 23.0134 4.93694 23.0717 4.58214 22.9085C4.22734 22.7453 4 22.3905 4 22V4ZM7 3C6.44772 3 6 3.44772 6 4V19.8258L11.3492 15.2407C11.7237 14.9198 12.2763 14.9198 12.6508 15.2407L18 19.8258V4C18 3.44772 17.5523 3 17 3H7Z" fill="#7E7F81"/>
                         </svg>
-
                       </span>
-                      БДД
-                    </a>
-                  </li>
-
-                  <li class="programs-sidebar__nav-claster-list-item">
-                    <a href="#" class="programs-sidebar__nav-claster-list-link">
-                      <span class="programs-sidebar__link-icon">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M4 4C4 2.34315 5.34315 1 7 1H17C18.6569 1 20 2.34315 20 4V22C20 22.3905 19.7727 22.7453 19.4179 22.9085C19.0631 23.0717 18.6457 23.0134 18.3492 22.7593L12 17.3171L5.65079 22.7593C5.35428 23.0134 4.93694 23.0717 4.58214 22.9085C4.22734 22.7453 4 22.3905 4 22V4ZM7 3C6.44772 3 6 3.44772 6 4V19.8258L11.3492 15.2407C11.7237 14.9198 12.2763 14.9198 12.6508 15.2407L18 19.8258V4C18 3.44772 17.5523 3 17 3H7Z" fill="#7E7F81"/>
-                        </svg>
-
-                      </span>
-                      ДОПОГ
-                    </a>
-                  </li>
-
-                  <li class="programs-sidebar__nav-claster-list-item">
-                    <a href="#" class="programs-sidebar__nav-claster-list-link">
-                      <span class="programs-sidebar__link-icon">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M4 4C4 2.34315 5.34315 1 7 1H17C18.6569 1 20 2.34315 20 4V22C20 22.3905 19.7727 22.7453 19.4179 22.9085C19.0631 23.0717 18.6457 23.0134 18.3492 22.7593L12 17.3171L5.65079 22.7593C5.35428 23.0134 4.93694 23.0717 4.58214 22.9085C4.22734 22.7453 4 22.3905 4 22V4ZM7 3C6.44772 3 6 3.44772 6 4V19.8258L11.3492 15.2407C11.7237 14.9198 12.2763 14.9198 12.6508 15.2407L18 19.8258V4C18 3.44772 17.5523 3 17 3H7Z" fill="#7E7F81"/>
-                        </svg>
-
-                      </span>
-                      МАП
-                    </a>
-                  </li>
-
-                  <li class="programs-sidebar__nav-claster-list-item">
-                    <a href="#" class="programs-sidebar__nav-claster-list-link">
-                      <span class="programs-sidebar__link-icon">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M4 4C4 2.34315 5.34315 1 7 1H17C18.6569 1 20 2.34315 20 4V22C20 22.3905 19.7727 22.7453 19.4179 22.9085C19.0631 23.0717 18.6457 23.0134 18.3492 22.7593L12 17.3171L5.65079 22.7593C5.35428 23.0134 4.93694 23.0717 4.58214 22.9085C4.22734 22.7453 4 22.3905 4 22V4ZM7 3C6.44772 3 6 3.44772 6 4V19.8258L11.3492 15.2407C11.7237 14.9198 12.2763 14.9198 12.6508 15.2407L18 19.8258V4C18 3.44772 17.5523 3 17 3H7Z" fill="#7E7F81"/>
-                        </svg>
-
-                      </span>
-                      Спецсигналы
-                    </a>
+                      {{ category.title }}
+                    </NuxtLink>
                   </li>
                 </ul>
               </nav>
             </div>
 
-
-
-            <div class="programs-sidebar__nav-claster">
+            <div v-if="otherCategories.length" class="programs-sidebar__nav-claster">
               <h2 class="programs-sidebar__nav-claster-title">Другие направления подготовки</h2>
               <nav class="programs-sidebar__nav-claster-list">
                 <ul class="programs-sidebar__nav-claster-list-items">
-                  <li class="programs-sidebar__nav-claster-list-item">
-                    <a href="#" class="programs-sidebar__nav-claster-list-link">Библиотечное дело</a>
-                  </li>
-                  <li class="programs-sidebar__nav-claster-list-item">
-                    <a href="#" class="programs-sidebar__nav-claster-list-link">Гражданская оборона</a>
-                  </li>
-                  <li class="programs-sidebar__nav-claster-list-item">
-                    <a href="#" class="programs-sidebar__nav-claster-list-link">Госзакупки</a>
-                  </li>
-                  <li class="programs-sidebar__nav-claster-list-item">
-                    <a href="#" class="programs-sidebar__nav-claster-list-link">Доступная среда</a>
-                  </li>
-                  <li class="programs-sidebar__nav-claster-list-item">
-                    <a href="#" class="programs-sidebar__nav-claster-list-link">Допуск в СРО</a>
-                  </li>
-                  <li class="programs-sidebar__nav-claster-list-item">
-                    <a href="#" class="programs-sidebar__nav-claster-list-link">Защита персональных данных</a>
-                  </li>
-                  <li class="programs-sidebar__nav-claster-list-item">
-                    <a href="#" class="programs-sidebar__nav-claster-list-link">Компьютерные программы</a>
-                  </li>
-                  <li class="programs-sidebar__nav-claster-list-item">
-                    <a href="#" class="programs-sidebar__nav-claster-list-link">Лифтовое оборудование</a>
-                  </li>
-                  <li class="programs-sidebar__nav-claster-list-item">
-                    <a href="#" class="programs-sidebar__nav-claster-list-link">Метрология</a>
-                  </li>
-                  <li class="programs-sidebar__nav-claster-list-item">
-                    <a href="#" class="programs-sidebar__nav-claster-list-link">Обучение нефтяников</a>
-                  </li>
-                  <li class="programs-sidebar__nav-claster-list-item">
-                    <a href="#" class="programs-sidebar__nav-claster-list-link">Охранная деятельность</a>
-                  </li>
-                  <li class="programs-sidebar__nav-claster-list-item">
-                    <a href="#" class="programs-sidebar__nav-claster-list-link">Охрана труда</a>
-                  </li>
-                  <li class="programs-sidebar__nav-claster-list-item">
-                    <a href="#" class="programs-sidebar__nav-claster-list-link">Педагогика и психология</a>
-                  </li>
-                  <li class="programs-sidebar__nav-claster-list-item">
-                    <a href="#" class="programs-sidebar__nav-claster-list-link">Пожарная безопасность</a>
-                  </li>
-                  <li class="programs-sidebar__nav-claster-list-item">
-                    <a href="#" class="programs-sidebar__nav-claster-list-link">Промышленная безопасность</a>
-                  </li>
-                  <li class="programs-sidebar__nav-claster-list-item">
-                    <a href="#" class="programs-sidebar__nav-claster-list-link">Противодействие коррупции</a>
-                  </li>
-                  <li class="programs-sidebar__nav-claster-list-item">
-                    <a href="#" class="programs-sidebar__nav-claster-list-link">Работа на высоте</a>
-                  </li>
-                  <li class="programs-sidebar__nav-claster-list-item">
-                    <a href="#" class="programs-sidebar__nav-claster-list-link">Радиационная безопасность</a>
-                  </li>
-                  <li class="programs-sidebar__nav-claster-list-item">
-                    <a href="#" class="programs-sidebar__nav-claster-list-link">Социальная работа</a>
-                  </li>
-                  <li class="programs-sidebar__nav-claster-list-item">
-                    <a href="#" class="programs-sidebar__nav-claster-list-link">Техносферная безопасность</a>
-                  </li>
-                  <li class="programs-sidebar__nav-claster-list-item">
-                    <a href="#" class="programs-sidebar__nav-claster-list-link">Транспортная безопасность</a>
-                  </li>
-                  <li class="programs-sidebar__nav-claster-list-item">
-                    <a href="#" class="programs-sidebar__nav-claster-list-link">Управление персоналом</a>
-                  </li>
-                  <li class="programs-sidebar__nav-claster-list-item">
-                    <a href="#" class="programs-sidebar__nav-claster-list-link">Экологическая безопасность</a>
-                  </li>
-                  <li class="programs-sidebar__nav-claster-list-item">
-                    <a href="#" class="programs-sidebar__nav-claster-list-link">Экономика и бухгалтерский учет</a>
-                  </li>
-                  <li class="programs-sidebar__nav-claster-list-item">
-                    <a href="#" class="programs-sidebar__nav-claster-list-link">Электробезопасность</a>
-                  </li>
-                  <li class="programs-sidebar__nav-claster-list-item">
-                    <a href="#" class="programs-sidebar__nav-claster-list-link">Энергетическая безопасность</a>
+                  <li
+                    v-for="category in otherCategories"
+                    :key="category.slug"
+                    class="programs-sidebar__nav-claster-list-item"
+                  >
+                    <NuxtLink
+                      :to="`/programs/categories/${category.slug}`"
+                      class="programs-sidebar__nav-claster-list-link"
+                    >
+                      {{ category.title }}
+                    </NuxtLink>
                   </li>
                 </ul>
               </nav>
@@ -161,19 +63,35 @@
            
 
             <div class="programs-main__head">
-              <h1 class="programs-main__title">БДД</h1>
-              <p class="programs-main__description">
-                Обучение по программе БДД (Безопасность дорожного движения)
+              <h1 v-if="pageTitle" class="programs-main__title">{{ pageTitle }}</h1>
+              <p v-if="pageSubtitle" class="programs-main__description">
+                {{ pageSubtitle }}
               </p>
             </div>
 
-            <form class="programs-main__search-row" action="#" @submit.prevent>
+            <form class="programs-main__search-row" @submit.prevent="applySearch">
               <label class="programs-main__search">
                 <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <circle cx="6.5" cy="6.5" r="5" stroke="#7E7F81" stroke-width="2"/>
                   <path d="M10 10L14 14" stroke="#7E7F81" stroke-width="2" stroke-linecap="round"/>
                 </svg>
-                <input type="text" class="programs-main__search-input" placeholder="Поиск по курсам">
+                <input
+                  v-model="searchQuery"
+                  type="text"
+                  class="programs-main__search-input"
+                  placeholder="Поиск по курсам"
+                >
+                <button
+                  v-if="searchQuery"
+                  type="button"
+                  class="programs-main__search-clear"
+                  aria-label="Очистить поиск"
+                  @click="clearSearch"
+                >
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path d="M1 1L13 13M13 1L1 13" stroke="#7E7F81" stroke-width="1.5" stroke-linecap="round"/>
+                  </svg>
+                </button>
               </label>
               <button type="submit" class="programs-main__search-btn">Найти</button>
             </form>
@@ -181,7 +99,12 @@
             <div class="programs-main__filters">
                 <div class="programs-main__filters-wrapper">
                     <div class="programs-main__filters-row">
-                    <button type="button" class="programs-main__filter programs-main__filter--active">
+                    <button
+                      type="button"
+                      class="programs-main__filter"
+                      :class="{ 'programs-main__filter--active': selectedTypeId == null && !activeSearch }"
+                      @click="selectedTypeId = null"
+                    >
                         <span>
                             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M4.27907 7.06977H2.7907C0.989767 7.06977 0 6.08 0 4.27907V2.7907C0 0.989767 0.989767 0 2.7907 0H4.27907C6.08 0 7.06977 0.989767 7.06977 2.7907V4.27907C7.06977 6.08 6.08 7.06977 4.27907 7.06977ZM2.7907 1.11628C1.61488 1.11628 1.11628 1.61488 1.11628 2.7907V4.27907C1.11628 5.45488 1.61488 5.95349 2.7907 5.95349H4.27907C5.45488 5.95349 5.95349 5.45488 5.95349 4.27907V2.7907C5.95349 1.61488 5.45488 1.11628 4.27907 1.11628H2.7907Z" fill="white"/>
@@ -189,97 +112,33 @@
                             <path d="M13.2093 16H11.7209C9.92 16 8.93023 15.0102 8.93023 13.2093V11.7209C8.93023 9.92 9.92 8.93023 11.7209 8.93023H13.2093C15.0102 8.93023 16 9.92 16 11.7209V13.2093C16 15.0102 15.0102 16 13.2093 16ZM11.7209 10.0465C10.5451 10.0465 10.0465 10.5451 10.0465 11.7209V13.2093C10.0465 14.3851 10.5451 14.8837 11.7209 14.8837H13.2093C14.3851 14.8837 14.8837 14.3851 14.8837 13.2093V11.7209C14.8837 10.5451 14.3851 10.0465 13.2093 10.0465H11.7209Z" fill="white"/>
                             <path d="M4.27907 16H2.7907C0.989767 16 0 15.0102 0 13.2093V11.7209C0 9.92 0.989767 8.93023 2.7907 8.93023H4.27907C6.08 8.93023 7.06977 9.92 7.06977 11.7209V13.2093C7.06977 15.0102 6.08 16 4.27907 16ZM2.7907 10.0465C1.61488 10.0465 1.11628 10.5451 1.11628 11.7209V13.2093C1.11628 14.3851 1.61488 14.8837 2.7907 14.8837H4.27907C5.45488 14.8837 5.95349 14.3851 5.95349 13.2093V11.7209C5.95349 10.5451 5.45488 10.0465 4.27907 10.0465H2.7907Z" fill="white"/>
                             </svg>
-
                         </span>
                         Все курсы
                     </button>
-                    <button type="button" class="programs-main__filter">
+                    <button
+                      v-for="type in programTypes"
+                      :key="type.id"
+                      type="button"
+                      class="programs-main__filter"
+                      :class="{ 'programs-main__filter--active': selectedTypeId === type.id && !activeSearch }"
+                      @click="selectedTypeId = type.id"
+                    >
                         <span>
-                            <svg width="15" height="16" viewBox="0 0 15 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M10.3565 16H4.64345C1.34414 16 0.729977 14.4 0.572867 12.8447L0.0372641 6.88373C-0.041291 6.10233 -0.062715 4.94884 0.679988 4.08559C1.32271 3.3414 2.38678 2.98419 3.92931 2.98419H11.0707C12.6204 2.98419 13.6844 3.34884 14.32 4.08559C15.0627 4.94884 15.0413 6.10233 14.9627 6.89117L14.4271 12.8372C14.27 14.4 13.6559 16 10.3565 16ZM3.92931 4.09303C2.72242 4.09303 1.89402 4.33861 1.47268 4.82977C1.12275 5.23163 1.00849 5.84931 1.10133 6.7721L1.63693 12.733C1.75834 13.9088 2.06541 14.8837 4.64345 14.8837H10.3565C12.9274 14.8837 13.2417 13.9088 13.3631 12.7256L13.8987 6.77954C13.9915 5.84931 13.8772 5.23163 13.5273 4.82977C13.106 4.33861 12.2776 4.09303 11.0707 4.09303H3.92931Z" fill="white"/>
-                            <path d="M10.3578 4.09302C10.065 4.09302 9.82218 3.84 9.82218 3.53488V2.93953C9.82218 1.61488 9.82218 1.11628 8.07254 1.11628H6.92992C5.18029 1.11628 5.18029 1.61488 5.18029 2.93953V3.53488C5.18029 3.84 4.93748 4.09302 4.64468 4.09302C4.35189 4.09302 4.10908 3.84 4.10908 3.53488V2.93953C4.10908 1.62977 4.10908 0 6.92992 0H8.07254C10.8934 0 10.8934 1.62977 10.8934 2.93953V3.53488C10.8934 3.84 10.6506 4.09302 10.3578 4.09302Z" fill="white"/>
-                            <path d="M7.50123 11.5349C5.53735 11.5349 5.53735 10.2698 5.53735 9.51069V8.74418C5.53735 7.69488 5.78016 7.44186 6.78709 7.44186H8.21537C9.2223 7.44186 9.46511 7.69488 9.46511 8.74418V9.48837C9.46511 10.2623 9.46511 11.5349 7.50123 11.5349ZM6.60856 8.55814C6.60856 8.61767 6.60856 8.68465 6.60856 8.74418V9.51069C6.60856 10.2772 6.60856 10.4186 7.50123 10.4186C8.3939 10.4186 8.3939 10.2995 8.3939 9.50325V8.74418C8.3939 8.68465 8.3939 8.61767 8.3939 8.55814C8.33677 8.55814 8.2725 8.55814 8.21537 8.55814H6.78709C6.72996 8.55814 6.66569 8.55814 6.60856 8.55814Z" fill="white"/>
-                            <path d="M8.92916 10.0614C8.66493 10.0614 8.42926 9.85302 8.4007 9.57022C8.36499 9.26511 8.57209 8.98232 8.86489 8.94511C10.7502 8.69953 12.557 7.95534 14.0781 6.80185C14.3138 6.61581 14.6494 6.67534 14.8279 6.92837C14.9993 7.17395 14.9493 7.52371 14.7065 7.70976C13.0354 8.97488 11.0644 9.78604 8.99343 10.0614C8.97201 10.0614 8.95058 10.0614 8.92916 10.0614Z" fill="white"/>
-                            <path d="M6.07347 10.0688C6.05205 10.0688 6.03063 10.0688 6.0092 10.0688C4.05246 9.83806 2.14572 9.09388 0.496061 7.91806C0.253254 7.7469 0.188981 7.39713 0.353233 7.14411C0.517485 6.89109 0.853129 6.82411 1.09594 6.99527C2.60277 8.0669 4.33812 8.74411 6.12346 8.95992C6.41626 8.99713 6.6305 9.27248 6.59479 9.5776C6.57337 9.86039 6.34485 10.0688 6.07347 10.0688Z" fill="white"/>
-                            </svg>
-
-                        </span>
-                        Повышение квалификации
-                    </button>
-                    <button type="button" class="programs-main__filter">
-                        <span>
-                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M4.1907 13.1349C3.88558 13.1349 3.63256 12.8819 3.63256 12.5768V11.0363C3.63256 10.7312 3.88558 10.4782 4.1907 10.4782C4.49581 10.4782 4.74884 10.7312 4.74884 11.0363V12.5768C4.74884 12.8894 4.49581 13.1349 4.1907 13.1349Z" fill="white"/>
-                            <path d="M8 13.1349C7.69488 13.1349 7.44186 12.8819 7.44186 12.5767V9.48837C7.44186 9.18326 7.69488 8.93023 8 8.93023C8.30512 8.93023 8.55814 9.18326 8.55814 9.48837V12.5767C8.55814 12.8893 8.30512 13.1349 8 13.1349Z" fill="white"/>
-                            <path d="M11.8093 13.1349C11.5042 13.1349 11.2512 12.8819 11.2512 12.5768V7.94797C11.2512 7.64285 11.5042 7.38983 11.8093 7.38983C12.1144 7.38983 12.3674 7.64285 12.3674 7.94797V12.5768C12.3674 12.8894 12.1219 13.1349 11.8093 13.1349Z" fill="white"/>
-                            <path d="M4.188 8.87801C3.93498 8.87801 3.71173 8.70684 3.64475 8.45382C3.57033 8.15615 3.74893 7.85103 4.05405 7.77661C6.79266 7.09196 9.20382 5.59615 11.042 3.46033L11.3843 3.05847C11.5852 2.82777 11.935 2.79801 12.1731 2.99894C12.4038 3.19987 12.4336 3.54963 12.2327 3.78777L11.8903 4.18964C9.90335 6.5115 7.28382 8.12638 4.32196 8.86312C4.27731 8.87801 4.23266 8.87801 4.188 8.87801Z" fill="white"/>
-                            <path d="M11.8084 6.15442C11.5033 6.15442 11.2502 5.9014 11.2502 5.59628V3.9814H9.62791C9.32279 3.9814 9.06977 3.72837 9.06977 3.42326C9.06977 3.11814 9.32279 2.86512 9.62791 2.86512H11.8084C12.1135 2.86512 12.3665 3.11814 12.3665 3.42326V5.60372C12.3665 5.90884 12.1209 6.15442 11.8084 6.15442Z" fill="white"/>
+                          <img
+                            v-if="type.icon"
+                            :src="type.icon"
+                            :alt="type.title"
+                            class="programs-main__filter-icon"
+                          >
+                          <svg v-else width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M10.2326 16H5.76744C1.72651 16 0 14.2735 0 10.2326V5.76744C0 1.72651 1.72651 0 5.76744 0H10.2326C14.2735 0 16 1.72651 16 5.76744V10.2326C16 14.2735 14.2735 16 10.2326 16ZM5.76744 1.11628C2.33674 1.11628 1.11628 2.33674 1.11628 5.76744V10.2326C1.11628 13.6633 2.33674 14.8837 5.76744 14.8837H10.2326C13.6633 14.8837 14.8837 13.6633 14.8837 10.2326V5.76744C14.8837 2.33674 13.6633 1.11628 10.2326 1.11628H5.76744Z" fill="white"/>
-                            </svg>
-
+                          </svg>
                         </span>
-                        Профпереподготовка
+                        {{ type.title }}
                     </button>
-                    <button type="button" class="programs-main__filter">
-                        <span> 
-                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M8.01179 11.721C7.34349 11.721 6.66732 11.5573 6.14054 11.2373L1.40737 8.3129C0.526781 7.76968 0 6.8544 0 5.85726C0 4.86012 0.526781 3.94484 1.40737 3.40162L6.1484 0.48462C7.20197 -0.162775 8.84521 -0.162775 9.89091 0.492062L14.6005 3.4165C15.4732 3.95972 16 4.875 16 5.8647C16 6.8544 15.4732 7.76968 14.6005 8.3129L9.89091 11.2373C9.36413 11.5648 8.68796 11.721 8.01179 11.721ZM8.01179 1.11713C7.56364 1.11713 7.11548 1.21387 6.79312 1.42223L2.05995 4.33923C1.50958 4.68153 1.18722 5.23219 1.18722 5.85726C1.18722 6.48233 1.50172 7.03299 2.05995 7.37529L6.79312 10.2997C7.4457 10.7016 8.59361 10.7016 9.24619 10.2997L13.9558 7.37529C14.5061 7.03299 14.8206 6.48233 14.8206 5.85726C14.8206 5.23219 14.5061 4.68153 13.9558 4.33923L9.24619 1.41479C8.91597 1.22131 8.46781 1.11713 8.01179 1.11713Z" fill="white"/>
-                            <path d="M8.00459 16C7.65865 16 7.30484 15.9554 7.02179 15.8661L4.51369 15.0773C3.32646 14.7052 2.39084 13.4774 2.3987 12.2942L2.40656 8.80424C2.40656 8.49914 2.67388 8.24614 2.99624 8.24614C3.3186 8.24614 3.58592 8.49914 3.58592 8.80424L3.57806 12.2942C3.57806 12.9937 4.19133 13.7974 4.89108 14.0206L7.39919 14.8094C7.71368 14.9061 8.2955 14.9061 8.61 14.8094L11.1181 14.0206C11.8179 13.7974 12.4311 12.9937 12.4311 12.3017V8.84889C12.4311 8.54379 12.6985 8.29079 13.0208 8.29079C13.3432 8.29079 13.6105 8.54379 13.6105 8.84889V12.3017C13.6105 13.4848 12.6827 14.7052 11.4955 15.0847L8.9874 15.8735C8.70435 15.9554 8.35054 16 8.00459 16Z" fill="white"/>
-                            <path d="M15.3931 10.791C15.0708 10.791 14.8034 10.538 14.8034 10.2329V5.76812C14.8034 5.46302 15.0708 5.21002 15.3931 5.21002C15.7155 5.21002 15.9828 5.46302 15.9828 5.76812V10.2329C15.9828 10.538 15.7155 10.791 15.3931 10.791Z" fill="white"/>
-                            </svg>
-
-                        </span>
-                        Тестирование
-                    </button>
-
-                    <button type="button" class="programs-main__filter">
-                        <span>
-                            <svg width="15" height="16" viewBox="0 0 15 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M10.3565 16H4.64345C1.34414 16 0.729977 14.4 0.572867 12.8447L0.0372641 6.88373C-0.041291 6.10233 -0.062715 4.94884 0.679988 4.08559C1.32271 3.3414 2.38678 2.98419 3.92931 2.98419H11.0707C12.6204 2.98419 13.6844 3.34884 14.32 4.08559C15.0627 4.94884 15.0413 6.10233 14.9627 6.89117L14.4271 12.8372C14.27 14.4 13.6559 16 10.3565 16ZM3.92931 4.09303C2.72242 4.09303 1.89402 4.33861 1.47268 4.82977C1.12275 5.23163 1.00849 5.84931 1.10133 6.7721L1.63693 12.733C1.75834 13.9088 2.06541 14.8837 4.64345 14.8837H10.3565C12.9274 14.8837 13.2417 13.9088 13.3631 12.7256L13.8987 6.77954C13.9915 5.84931 13.8772 5.23163 13.5273 4.82977C13.106 4.33861 12.2776 4.09303 11.0707 4.09303H3.92931Z" fill="white"/>
-                            <path d="M10.3578 4.09302C10.065 4.09302 9.82218 3.84 9.82218 3.53488V2.93953C9.82218 1.61488 9.82218 1.11628 8.07254 1.11628H6.92992C5.18029 1.11628 5.18029 1.61488 5.18029 2.93953V3.53488C5.18029 3.84 4.93748 4.09302 4.64468 4.09302C4.35189 4.09302 4.10908 3.84 4.10908 3.53488V2.93953C4.10908 1.62977 4.10908 0 6.92992 0H8.07254C10.8934 0 10.8934 1.62977 10.8934 2.93953V3.53488C10.8934 3.84 10.6506 4.09302 10.3578 4.09302Z" fill="white"/>
-                            <path d="M7.50123 11.5349C5.53735 11.5349 5.53735 10.2698 5.53735 9.51069V8.74418C5.53735 7.69488 5.78016 7.44186 6.78709 7.44186H8.21537C9.2223 7.44186 9.46511 7.69488 9.46511 8.74418V9.48837C9.46511 10.2623 9.46511 11.5349 7.50123 11.5349ZM6.60856 8.55814C6.60856 8.61767 6.60856 8.68465 6.60856 8.74418V9.51069C6.60856 10.2772 6.60856 10.4186 7.50123 10.4186C8.3939 10.4186 8.3939 10.2995 8.3939 9.50325V8.74418C8.3939 8.68465 8.3939 8.61767 8.3939 8.55814C8.33677 8.55814 8.2725 8.55814 8.21537 8.55814H6.78709C6.72996 8.55814 6.66569 8.55814 6.60856 8.55814Z" fill="white"/>
-                            <path d="M8.92916 10.0614C8.66493 10.0614 8.42926 9.85302 8.4007 9.57022C8.36499 9.26511 8.57209 8.98232 8.86489 8.94511C10.7502 8.69953 12.557 7.95534 14.0781 6.80185C14.3138 6.61581 14.6494 6.67534 14.8279 6.92837C14.9993 7.17395 14.9493 7.52371 14.7065 7.70976C13.0354 8.97488 11.0644 9.78604 8.99343 10.0614C8.97201 10.0614 8.95058 10.0614 8.92916 10.0614Z" fill="white"/>
-                            <path d="M6.07347 10.0688C6.05205 10.0688 6.03063 10.0688 6.0092 10.0688C4.05246 9.83806 2.14572 9.09388 0.496061 7.91806C0.253254 7.7469 0.188981 7.39713 0.353233 7.14411C0.517485 6.89109 0.853129 6.82411 1.09594 6.99527C2.60277 8.0669 4.33812 8.74411 6.12346 8.95992C6.41626 8.99713 6.6305 9.27248 6.59479 9.5776C6.57337 9.86039 6.34485 10.0688 6.07347 10.0688Z" fill="white"/>
-                            </svg>
-
-                        </span>
-                        Повышение квалификации
-                    </button>
-                    <button type="button" class="programs-main__filter">
-                        <span>
-                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M4.1907 13.1349C3.88558 13.1349 3.63256 12.8819 3.63256 12.5768V11.0363C3.63256 10.7312 3.88558 10.4782 4.1907 10.4782C4.49581 10.4782 4.74884 10.7312 4.74884 11.0363V12.5768C4.74884 12.8894 4.49581 13.1349 4.1907 13.1349Z" fill="white"/>
-                            <path d="M8 13.1349C7.69488 13.1349 7.44186 12.8819 7.44186 12.5767V9.48837C7.44186 9.18326 7.69488 8.93023 8 8.93023C8.30512 8.93023 8.55814 9.18326 8.55814 9.48837V12.5767C8.55814 12.8893 8.30512 13.1349 8 13.1349Z" fill="white"/>
-                            <path d="M11.8093 13.1349C11.5042 13.1349 11.2512 12.8819 11.2512 12.5768V7.94797C11.2512 7.64285 11.5042 7.38983 11.8093 7.38983C12.1144 7.38983 12.3674 7.64285 12.3674 7.94797V12.5768C12.3674 12.8894 12.1219 13.1349 11.8093 13.1349Z" fill="white"/>
-                            <path d="M4.188 8.87801C3.93498 8.87801 3.71173 8.70684 3.64475 8.45382C3.57033 8.15615 3.74893 7.85103 4.05405 7.77661C6.79266 7.09196 9.20382 5.59615 11.042 3.46033L11.3843 3.05847C11.5852 2.82777 11.935 2.79801 12.1731 2.99894C12.4038 3.19987 12.4336 3.54963 12.2327 3.78777L11.8903 4.18964C9.90335 6.5115 7.28382 8.12638 4.32196 8.86312C4.27731 8.87801 4.23266 8.87801 4.188 8.87801Z" fill="white"/>
-                            <path d="M11.8084 6.15442C11.5033 6.15442 11.2502 5.9014 11.2502 5.59628V3.9814H9.62791C9.32279 3.9814 9.06977 3.72837 9.06977 3.42326C9.06977 3.11814 9.32279 2.86512 9.62791 2.86512H11.8084C12.1135 2.86512 12.3665 3.11814 12.3665 3.42326V5.60372C12.3665 5.90884 12.1209 6.15442 11.8084 6.15442Z" fill="white"/>
-                            <path d="M10.2326 16H5.76744C1.72651 16 0 14.2735 0 10.2326V5.76744C0 1.72651 1.72651 0 5.76744 0H10.2326C14.2735 0 16 1.72651 16 5.76744V10.2326C16 14.2735 14.2735 16 10.2326 16ZM5.76744 1.11628C2.33674 1.11628 1.11628 2.33674 1.11628 5.76744V10.2326C1.11628 13.6633 2.33674 14.8837 5.76744 14.8837H10.2326C13.6633 14.8837 14.8837 13.6633 14.8837 10.2326V5.76744C14.8837 2.33674 13.6633 1.11628 10.2326 1.11628H5.76744Z" fill="white"/>
-                            </svg>
-
-                        </span>
-                        Профпереподготовка
-                    </button>
-                    <button type="button" class="programs-main__filter">
-                        <span> 
-                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M8.01179 11.721C7.34349 11.721 6.66732 11.5573 6.14054 11.2373L1.40737 8.3129C0.526781 7.76968 0 6.8544 0 5.85726C0 4.86012 0.526781 3.94484 1.40737 3.40162L6.1484 0.48462C7.20197 -0.162775 8.84521 -0.162775 9.89091 0.492062L14.6005 3.4165C15.4732 3.95972 16 4.875 16 5.8647C16 6.8544 15.4732 7.76968 14.6005 8.3129L9.89091 11.2373C9.36413 11.5648 8.68796 11.721 8.01179 11.721ZM8.01179 1.11713C7.56364 1.11713 7.11548 1.21387 6.79312 1.42223L2.05995 4.33923C1.50958 4.68153 1.18722 5.23219 1.18722 5.85726C1.18722 6.48233 1.50172 7.03299 2.05995 7.37529L6.79312 10.2997C7.4457 10.7016 8.59361 10.7016 9.24619 10.2997L13.9558 7.37529C14.5061 7.03299 14.8206 6.48233 14.8206 5.85726C14.8206 5.23219 14.5061 4.68153 13.9558 4.33923L9.24619 1.41479C8.91597 1.22131 8.46781 1.11713 8.01179 1.11713Z" fill="white"/>
-                            <path d="M8.00459 16C7.65865 16 7.30484 15.9554 7.02179 15.8661L4.51369 15.0773C3.32646 14.7052 2.39084 13.4774 2.3987 12.2942L2.40656 8.80424C2.40656 8.49914 2.67388 8.24614 2.99624 8.24614C3.3186 8.24614 3.58592 8.49914 3.58592 8.80424L3.57806 12.2942C3.57806 12.9937 4.19133 13.7974 4.89108 14.0206L7.39919 14.8094C7.71368 14.9061 8.2955 14.9061 8.61 14.8094L11.1181 14.0206C11.8179 13.7974 12.4311 12.9937 12.4311 12.3017V8.84889C12.4311 8.54379 12.6985 8.29079 13.0208 8.29079C13.3432 8.29079 13.6105 8.54379 13.6105 8.84889V12.3017C13.6105 13.4848 12.6827 14.7052 11.4955 15.0847L8.9874 15.8735C8.70435 15.9554 8.35054 16 8.00459 16Z" fill="white"/>
-                            <path d="M15.3931 10.791C15.0708 10.791 14.8034 10.538 14.8034 10.2329V5.76812C14.8034 5.46302 15.0708 5.21002 15.3931 5.21002C15.7155 5.21002 15.9828 5.46302 15.9828 5.76812V10.2329C15.9828 10.538 15.7155 10.791 15.3931 10.791Z" fill="white"/>
-                            </svg>
-
-                        </span>
-                        Тестирование
-                    </button>
-
-
-    
-                    
                     </div>
                 </div>
-                
-              
             </div>
-
             <div class="programs-main__toolbar">
               <div class="programs-main__toolbar-filters">
                 <span class="programs-main__toolbar-icon" aria-hidden="true">
@@ -289,11 +148,15 @@
                 </span>
 
                 <label class="programs-main__select-wrap">
-                  <select class="programs-main__toolbar-select">
-                    <option selected>Формат обучения</option>
-                    <option>Дистанционно</option>
-                    <option>Очно-заочно</option>
-                    <option>Очное обучение</option>
+                  <select v-model="selectedFormatId" class="programs-main__toolbar-select">
+                    <option value="">Формат обучения</option>
+                    <option
+                      v-for="format in trainingFormats"
+                      :key="format.id"
+                      :value="format.id"
+                    >
+                      {{ format.title }}
+                    </option>
                   </select>
                   <svg class="programs-main__select-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                     <path d="M6 9L12 15L18 9" stroke="#1C1C1C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -301,11 +164,11 @@
                 </label>
 
                 <label class="programs-main__select-wrap">
-                  <select class="programs-main__toolbar-select">
-                    <option selected>Срок обучения</option>
-                    <option>До 20 часов</option>
-                    <option>20–40 часов</option>
-                    <option>Более 40 часов</option>
+                  <select v-model="selectedDuration" class="programs-main__toolbar-select">
+                    <option value="">Срок обучения</option>
+                    <option value="lt20">До 20 часов</option>
+                    <option value="20-40">20–40 часов</option>
+                    <option value="gt40">Более 40 часов</option>
                   </select>
                   <svg class="programs-main__select-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                     <path d="M6 9L12 15L18 9" stroke="#1C1C1C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -321,100 +184,50 @@
                 </span>
 
                 <label class="programs-main__select-wrap">
-                  <select class="programs-main__toolbar-select">
-                    <option selected>По умолчанию</option>
-                    <option>По названию</option>
-                    <option>По цене (возр.)</option>
-                    <option>По цене (убыв.)</option>
+                  <select v-model="selectedSort" class="programs-main__toolbar-select">
+                    <option value="default">По умолчанию</option>
+                    <option value="title">По названию</option>
+                    <option value="price-asc">По цене (возр.)</option>
+                    <option value="price-desc">По цене (убыв.)</option>
                   </select>
                   <svg class="programs-main__select-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                     <path d="M6 9L12 15L18 9" stroke="#1C1C1C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                   </svg>
                 </label>
+
               </div>
             </div>
 
-            <div class="programs-main__grid">
+            <div v-if="programs.length" class="programs-main__grid">
               <ProgramCard
-                to="/programs/1"
-                category="Повышение квалификации"
-                title="Ежегодные занятия с водителями автотранспортных средств"
-                description="Программа для водителей организаций с выдачей удостоверения установленного образца."
-                duration="20 часов"
-                format="Дистанционно"
-                price="3 000 ₽"
-                hit
+                v-for="program in programs"
+                :key="program.id"
+                :to="program.to"
+                :category="program.category"
+                :category-icon="program.categoryIcon"
+                :title="program.title"
+                :description="program.description"
+                :duration="program.duration"
+                :format="program.format"
+                :price="program.price"
+                :registration-open="program.registrationOpen"
+                :hit="program.hit"
               />
+            </div>
 
-              <ProgramCard
-                to="/programs/2"
-                category="Очное обучение"
-                title="Обучение по БДД для водителей автотранспортных средств организаций"
-                description="Курс для водителей, осуществляющих перевозки пассажиров и грузов в организациях."
-                duration="40 часов"
-                format="Очно-заочно"
-                price="4 500 ₽"
-              />
-
-              <ProgramCard
-                to="/programs/3"
-                category="Повышение квалификации"
-                title="Безопасность дорожного движения для лиц, допущенных к управлению ТС"
-                description="Обучение водителей по вопросам безопасности дорожного движения и правил перевозки грузов."
-                duration="72 часа"
-                format="Дистанционно"
-                price="3 000 ₽"
-              />
-
-              <ProgramCard
-                to="/programs/4"
-                category="Профпереподготовка"
-                title="Профессиональная переподготовка по программе «Безопасность дорожного движения»"
-                description="Переподготовка специалистов для работы в сфере организации безопасности дорожного движения."
-                duration="256 часов"
-                format="Очно-заочно"
-                price="12 000 ₽"
-              />
-
-              <ProgramCard
-                to="/programs/5"
-                category="Повышение квалификации"
-                title="Обучение руководителей и специалистов по БДД"
-                description="Программа для руководителей организаций, ответственных за безопасность дорожного движения."
-                duration="40 часов"
-                format="Дистанционно"
-                price="3 500 ₽"
-              />
-
-              <ProgramCard
-                to="/programs/6"
-                category="Очное обучение"
-                title="Обучение водителей такси и легкового транспорта по БДД"
-                description="Курс для водителей, осуществляющих перевозку пассажиров на легковых автомобилях."
-                duration="24 часа"
-                format="Очно-заочно"
-                price="2 800 ₽"
-              />
-
-              <ProgramCard
-                to="/programs/7"
-                category="Повышение квалификации"
-                title="Обучение по перевозке опасных грузов автомобильным транспортом"
-                description="Программа для водителей, осуществляющих перевозку опасных грузов классов 1–9."
-                duration="56 часов"
-                format="Дистанционно"
-                price="5 200 ₽"
-              />
-
-              <ProgramCard
-                to="/programs/8"
-                category="Тестирование"
-                title="Проверка знаний требований безопасности дорожного движения"
-                description="Дистанционное тестирование для подтверждения знаний по программе БДД."
-                duration="8 часов"
-                format="Дистанционно"
-                price="1 500 ₽"
-              />
+            <div v-else class="programs-main__empty">
+              <div class="programs-main__empty-icon" aria-hidden="true">
+                <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="6" y="10" width="36" height="28" rx="4" stroke="#C4A24A" stroke-width="2"/>
+                  <path d="M6 18H42" stroke="#C4A24A" stroke-width="2"/>
+                  <path d="M16 28H32" stroke="#7E7F81" stroke-width="2" stroke-linecap="round"/>
+                  <path d="M16 34H26" stroke="#7E7F81" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <h2 class="programs-main__empty-title">Программы не найдены</h2>
+              <p class="programs-main__empty-text">
+                Пока нет доступных курсов. Загляните позже или выберите направление в меню слева.
+              </p>
             </div>
           </div>
         </div>
@@ -422,8 +235,262 @@
     </section>
 
     <AccreditationBanner
-      title="Не уверены, какое обучение требуется в вашем случае?"
-      description="Оставьте заявку, мы подскажем подходящую программу и порядок действий."
+      v-if="banner"
+      :title="banner.title || ''"
+      :description="banner.text || ''"
+      :image="mediaUrl(banner.image)"
     />
   </main>
 </template>
+
+<script setup>
+const config = useRuntimeConfig()
+const mediaUrl = useStrapiMedia()
+
+const pageQuery = new URLSearchParams({
+  'populate[banner_section][populate]': 'image',
+  'populate[Seo][populate][shareImage]': 'true',
+  'populate[Seo][populate][twitterImage]': 'true',
+}).toString()
+
+const { data: pageData } = await useAsyncData('page-all-program', () =>
+  $fetch(`/api/page-all-program?${pageQuery}`, {
+    baseURL: config.public.apiUrl,
+  }).catch(() => null),
+)
+
+const { data: categoriesData } = await useAsyncData('programs-categories', async () => {
+  const params = new URLSearchParams({
+    'pagination[pageSize]': '100',
+    sort: 'title:asc',
+  })
+
+  const response = await $fetch(`/api/programs-categories?${params}`, {
+    baseURL: config.public.apiUrl,
+  }).catch(() => null)
+
+  return response?.data || []
+})
+
+const page = computed(() => pageData.value?.data ?? {})
+const pageTitle = computed(() => page.value.title || '')
+const pageSubtitle = computed(() => page.value.subtitle || '')
+const banner = computed(() => page.value.banner_section ?? null)
+
+const categories = computed(() =>
+  (categoriesData.value || [])
+    .filter((item) => item?.slug && item?.title)
+    .map((item) => ({
+      title: item.title,
+      slug: item.slug,
+      popular: Boolean(item.popular),
+    })),
+)
+
+const popularCategories = computed(() => categories.value.filter((item) => item.popular))
+const otherCategories = computed(() => categories.value.filter((item) => !item.popular))
+
+
+function formatDuration(hours) {
+  if (hours == null || hours === '') return ''
+  const value = Number(hours)
+  if (Number.isNaN(value)) return ''
+  const n = Math.floor(value)
+  const mod10 = n % 10
+  const mod100 = n % 100
+  let word = 'часов'
+  if (mod100 < 11 || mod100 > 14) {
+    if (mod10 === 1) word = 'час'
+    else if (mod10 >= 2 && mod10 <= 4) word = 'часа'
+  }
+  return `${value} ${word}`
+}
+
+function formatPrice(price) {
+  if (price == null || price === '') return ''
+  return `${Number(price).toLocaleString('ru-RU')} ₽`
+}
+
+function mapProgram(item) {
+  return {
+    id: item.documentId || item.id,
+    to: item.slug ? `/programs/${item.slug}` : '/programs',
+    typeId: item.programs_type?.documentId || item.programs_type?.id || null,
+    formatId: item.programs_training_format?.documentId || item.programs_training_format?.id || null,
+    category: item.programs_type?.title || '',
+    categoryIcon: mediaUrl(item.programs_type?.icon) || '',
+    title: item.title || '',
+    description: item.short_description || '',
+    hours: item.duration_of_study_hours == null ? null : Number(item.duration_of_study_hours),
+    duration: formatDuration(item.duration_of_study_hours),
+    format: item.programs_training_format?.title || '',
+    priceValue: item.price_rub == null ? null : Number(item.price_rub),
+    price: formatPrice(item.price_rub),
+    registrationOpen: item.registration_is_open !== false,
+    hit: Boolean(item.best_seller),
+    categorySlug: item.programs_category?.slug || '',
+  }
+}
+
+
+const route = useRoute()
+const router = useRouter()
+
+const initialQuery = typeof route.query.q === 'string' ? route.query.q : ''
+const searchQuery = ref(initialQuery)
+const activeSearch = ref(initialQuery.trim())
+const selectedTypeId = ref(null)
+const selectedFormatId = ref('')
+const selectedDuration = ref('')
+const selectedSort = ref('default')
+
+function resetFilters() {
+  selectedTypeId.value = null
+  selectedFormatId.value = ''
+  selectedDuration.value = ''
+  selectedSort.value = 'default'
+}
+
+function syncSearchQuery(query) {
+  const nextQuery = query ? { q: query } : {}
+  router.replace({ query: nextQuery })
+}
+
+function applySearch() {
+  resetFilters()
+  activeSearch.value = searchQuery.value.trim()
+  syncSearchQuery(activeSearch.value)
+}
+
+function clearSearch() {
+  searchQuery.value = ''
+  activeSearch.value = ''
+  resetFilters()
+  syncSearchQuery('')
+}
+
+watch(
+  () => route.query.q,
+  (value) => {
+    const query = typeof value === 'string' ? value : ''
+    if (query === activeSearch.value) return
+    searchQuery.value = query
+    activeSearch.value = query.trim()
+    if (activeSearch.value) resetFilters()
+  },
+)
+
+const { data: formatsData } = await useAsyncData('programs-training-formats', async () => {
+  const params = new URLSearchParams({
+    'pagination[pageSize]': '100',
+    sort: 'title:asc',
+  })
+
+  const response = await $fetch(`/api/programs-training-formats?${params}`, {
+    baseURL: config.public.apiUrl,
+  }).catch(() => null)
+
+  return response?.data || []
+})
+
+const trainingFormats = computed(() =>
+  (formatsData.value || [])
+    .filter((item) => item?.title)
+    .map((item) => ({
+      id: item.documentId || item.id,
+      title: item.title,
+    })),
+)
+
+
+const { data: typesData } = await useAsyncData('programs-types', async () => {
+  const params = new URLSearchParams({
+    'pagination[pageSize]': '100',
+    sort: 'title:asc',
+    'populate[icon]': 'true',
+  })
+
+  const response = await $fetch(`/api/programs-types?${params}`, {
+    baseURL: config.public.apiUrl,
+  }).catch(() => null)
+
+  return response?.data || []
+})
+
+const programTypes = computed(() =>
+  (typesData.value || [])
+    .filter((item) => item?.title)
+    .map((item) => ({
+      id: item.documentId || item.id,
+      title: item.title,
+      icon: mediaUrl(item.icon) || '',
+    })),
+)
+
+const { data: programsData } = await useAsyncData('programs-list', async () => {
+  const params = new URLSearchParams({
+    'pagination[pageSize]': '200',
+    sort: 'title:asc',
+    'populate[programs_type][populate]': 'icon',
+    'populate[programs_training_format]': 'true',
+    'populate[programs_category]': 'true',
+  })
+
+  const response = await $fetch(`/api/programs?${params}`, {
+    baseURL: config.public.apiUrl,
+  }).catch(() => null)
+
+  return response?.data || []
+})
+
+const allPrograms = computed(() =>
+  (programsData.value || [])
+    .filter((item) => item?.slug && item?.title)
+    .map(mapProgram),
+)
+
+const programs = computed(() => {
+  let list = [...allPrograms.value]
+
+  if (activeSearch.value) {
+    const query = activeSearch.value.toLowerCase()
+    list = list.filter((item) =>
+      item.title.toLowerCase().includes(query)
+      || item.description.toLowerCase().includes(query),
+    )
+  } else {
+    if (selectedTypeId.value != null) {
+      list = list.filter((item) => item.typeId === selectedTypeId.value)
+    }
+
+    if (selectedFormatId.value) {
+      list = list.filter((item) => String(item.formatId) === String(selectedFormatId.value))
+    }
+
+    if (selectedDuration.value === 'lt20') {
+      list = list.filter((item) => item.hours != null && item.hours < 20)
+    } else if (selectedDuration.value === '20-40') {
+      list = list.filter((item) => item.hours != null && item.hours >= 20 && item.hours <= 40)
+    } else if (selectedDuration.value === 'gt40') {
+      list = list.filter((item) => item.hours != null && item.hours > 40)
+    }
+
+    if (selectedSort.value === 'title') {
+      list.sort((a, b) => a.title.localeCompare(b.title, 'ru'))
+    } else if (selectedSort.value === 'price-asc') {
+      list.sort((a, b) => (a.priceValue ?? Infinity) - (b.priceValue ?? Infinity))
+    } else if (selectedSort.value === 'price-desc') {
+      list.sort((a, b) => (b.priceValue ?? -Infinity) - (a.priceValue ?? -Infinity))
+    }
+  }
+
+  return list
+})
+
+const seo = computed(() => page.value.Seo ?? null)
+useSeoFromStrapi(seo, mediaUrl)
+
+useHead({
+  title: () => seo.value?.metaTitle || pageTitle.value || undefined,
+})
+</script>

@@ -485,6 +485,14 @@
 	display: flex;
 	align-items: flex-start;
 	column-gap: 15px;
+	text-decoration: none;
+	color: inherit;
+	cursor: pointer;
+}
+
+a.program-docs__list-item[aria-disabled='true'] {
+	pointer-events: none;
+	cursor: default;
 }
 
 .program-docs__list-icon {

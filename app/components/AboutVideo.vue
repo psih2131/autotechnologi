@@ -3,7 +3,7 @@
     <div class="container">
       <div class="about-video">
         <iframe
-          src="https://www.youtube.com/embed/tiEoSAE3TW8?si=ofvzwf8RfPkm1LOM"
+          :src="src"
           title="Видео об учебном центре"
           class="about-video__iframe"
           frameborder="0"
@@ -15,3 +15,12 @@
     </div>
   </section>
 </template>
+
+<script setup>
+defineProps({
+  src: {
+    type: String,
+    required: true,
+  },
+})
+</script>

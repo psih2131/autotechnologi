@@ -25,10 +25,26 @@ import logo5 from '~/assets/images/logos/x5.png'
 import logo6 from '~/assets/images/logos/x6.png'
 import logo7 from '~/assets/images/logos/x7.png'
 
+const props = defineProps({
+  logos: {
+    type: Array,
+    default: null,
+  },
+})
+
+const fallbackLogos = [logo1, logo2, logo3, logo4, logo5, logo6, logo7]
+
 const containerRef = ref(null)
 
-const logos = [logo1, logo2, logo3, logo4, logo5, logo6, logo7]
-const logoSlides = [...logos, ...logos]
+const resolvedLogos = computed(() =>
+  props.logos == null ? fallbackLogos : props.logos,
+)
+
+const logoSlides = computed(() => {
+  const list = resolvedLogos.value || []
+  if (!list.length) return []
+  return [...list, ...list]
+})
 
 const swiper = useSwiper(containerRef, {
   slidesPerView: 'auto',
@@ -47,5 +63,9 @@ watch(containerRef, (el) => {
   if (el) {
     nextTick(() => swiper.reInitialize())
   }
+})
+
+watch(logoSlides, () => {
+  nextTick(() => swiper.reInitialize())
 })
 </script>

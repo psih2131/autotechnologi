@@ -9,9 +9,9 @@
           </p>
         </div>
 
-        <div class="program-reviews__videos">
+        <div v-if="resolvedVideos.length" class="program-reviews__videos">
           <div
-            v-for="(video, idx) in reviewVideos"
+            v-for="(video, idx) in resolvedVideos"
             :key="idx"
             class="program-reviews__video-item"
           >
@@ -27,7 +27,7 @@
           </div>
         </div>
 
-        <div class="program-reviews__text-slider">
+        <div v-if="reviewSlides.length" class="program-reviews__text-slider">
           <div class="program-reviews__nav-row">
             <button
               type="button"
@@ -55,7 +55,12 @@
                   >
                     <p class="program-reviews__text">{{ review.text }}</p>
                     <div class="program-reviews__author">
-                      <img :src="review.avatar" :alt="review.name" class="program-reviews__avatar">
+                      <img
+                        v-if="review.avatar"
+                        :src="review.avatar"
+                        :alt="review.name"
+                        class="program-reviews__avatar"
+                      >
                       <div>
                         <p class="program-reviews__author-name">{{ review.name }}</p>
                         <p class="program-reviews__author-city">{{ review.city }}</p>
@@ -104,10 +109,18 @@ import avatar4 from '~/assets/images/who/x4.jpg'
 import avatar5 from '~/assets/images/who/x5.jpg'
 import avatar6 from '~/assets/images/who/x6.jpg'
 
-const containerRef = ref(null)
-const activeSlide = ref(0)
+const props = defineProps({
+  videos: {
+    type: Array,
+    default: null,
+  },
+  reviews: {
+    type: Array,
+    default: null,
+  },
+})
 
-const reviewVideos = [
+const fallbackVideos = [
   {
     src: 'https://www.youtube.com/embed/tiEoSAE3TW8?si=ofvzwf8RfPkm1LOM',
     title: 'Видеоотзыв 1',
@@ -118,50 +131,64 @@ const reviewVideos = [
   },
 ]
 
-const reviewSlides = [
-  [
-    {
-      text: 'Всё было изложено простым языком, так понятно и доступно, а главное Вы дали нам именно то, что действительно необходимо в ежедневной работе. Все слушатели повышения квалификации (более 30 человек) от всего сердца благодарят компанию Автотехнологии за безупречно проведенные курсы.',
-      name: 'Олег Кукушкин',
-      city: 'Москва',
-      avatar: avatar2,
-    },
-    {
-      text: 'В целом все не архи сложно и довольно удобно для человека, который замотивирован и умеет планировать свое время. Хотелось бы, чтобы материал был разнообразнее. Ответов на тесты искать в интернете не стоит) их там почти нет) Ограничений на пересдачу нет, но кто учит, тот сдаст и с первого раза.',
-      name: 'Владимир Санько',
-      city: 'Курск',
-      avatar: avatar5,
-    },
-  ],
-  [
-    {
-      text: 'Обучение прошло в удобном формате, материал структурирован и понятен. Особенно ценно, что можно проходить курс в своём темпе, не отрываясь от работы.',
-      name: 'Андрей Петров',
-      city: 'Челябинск',
-      avatar: avatar1,
-    },
-    {
-      text: 'Прошёл курс вместе с коллегами. Все остались довольны качеством материалов и оперативной поддержкой учебного центра.',
-      name: 'Сергей Морозов',
-      city: 'Екатеринбург',
-      avatar: avatar4,
-    },
-  ],
-  [
-    {
-      text: 'Документы получили быстро, всё официально. Рекомендую организациям, которым важно соблюдать требования по обучению персонала.',
-      name: 'Ирина Соколова',
-      city: 'Москва',
-      avatar: avatar6,
-    },
-    {
-      text: 'Удобная платформа, понятные тесты. После обучения чувствуешь себя увереннее за рулём в сложных условиях.',
-      name: 'Дмитрий Козлов',
-      city: 'Тюмень',
-      avatar: avatar3,
-    },
-  ],
+const fallbackReviews = [
+  {
+    text: 'Всё было изложено простым языком, так понятно и доступно, а главное Вы дали нам именно то, что действительно необходимо в ежедневной работе. Все слушатели повышения квалификации (более 30 человек) от всего сердца благодарят компанию Автотехнологии за безупречно проведенные курсы.',
+    name: 'Олег Кукушкин',
+    city: 'Москва',
+    avatar: avatar2,
+  },
+  {
+    text: 'В целом все не архи сложно и довольно удобно для человека, который замотивирован и умеет планировать свое время. Хотелось бы, чтобы материал был разнообразнее. Ответов на тесты искать в интернете не стоит) их там почти нет) Ограничений на пересдачу нет, но кто учит, тот сдаст и с первого раза.',
+    name: 'Владимир Санько',
+    city: 'Курск',
+    avatar: avatar5,
+  },
+  {
+    text: 'Обучение прошло в удобном формате, материал структурирован и понятен. Особенно ценно, что можно проходить курс в своём темпе, не отрываясь от работы.',
+    name: 'Андрей Петров',
+    city: 'Челябинск',
+    avatar: avatar1,
+  },
+  {
+    text: 'Прошёл курс вместе с коллегами. Все остались довольны качеством материалов и оперативной поддержкой учебного центра.',
+    name: 'Сергей Морозов',
+    city: 'Екатеринбург',
+    avatar: avatar4,
+  },
+  {
+    text: 'Документы получили быстро, всё официально. Рекомендую организациям, которым важно соблюдать требования по обучению персонала.',
+    name: 'Ирина Соколова',
+    city: 'Москва',
+    avatar: avatar6,
+  },
+  {
+    text: 'Удобная платформа, понятные тесты. После обучения чувствуешь себя увереннее за рулём в сложных условиях.',
+    name: 'Дмитрий Козлов',
+    city: 'Тюмень',
+    avatar: avatar3,
+  },
 ]
+
+const containerRef = ref(null)
+const activeSlide = ref(0)
+
+const resolvedVideos = computed(() =>
+  props.videos == null ? fallbackVideos : props.videos,
+)
+
+const resolvedReviews = computed(() =>
+  props.reviews == null ? fallbackReviews : props.reviews,
+)
+
+const reviewSlides = computed(() => {
+  const slides = []
+  const list = resolvedReviews.value || []
+  for (let i = 0; i < list.length; i += 2) {
+    slides.push(list.slice(i, i + 2))
+  }
+  return slides
+})
 
 const swiper = useSwiper(containerRef, {
   slidesPerView: 1,
@@ -176,5 +203,9 @@ watch(containerRef, (el) => {
   if (el) {
     nextTick(() => swiper.reInitialize())
   }
+})
+
+watch(reviewSlides, () => {
+  nextTick(() => swiper.reInitialize())
 })
 </script>
