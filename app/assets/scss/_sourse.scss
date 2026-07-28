@@ -118,9 +118,36 @@ ul {
 
 
 
-@media only screen and (max-width: 1150px) {
-
+@media only screen and (max-width: 1480px) {
+	.container {
+		width: 1200px;
+	}
 }
+
+@media only screen and (max-width: 1240px) {
+	.container {
+		width: 900px;
+	}
+}
+
+@media only screen and (max-width: 940px) {
+	.container {
+		width: 750px;
+	}
+}
+
+@media only screen and (max-width: 760px) {
+	.container {
+		width: 360px;
+	}
+}
+
+@media only screen and (max-width: 370px) {
+	.container {
+		width: 330px;
+	}
+}
+
 
 
 
