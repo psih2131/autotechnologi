@@ -282,3 +282,269 @@
 	background: linear-gradient(270deg, rgba(225, 214, 182, 0) 0%, rgba(225, 214, 182, 1) 100%);
 	pointer-events: none;
 }
+
+
+@media only screen and (max-width: 1480px) {
+	.documents-section__heading{
+		font-size: 32px;
+		line-height: 1.2;
+		margin-top: 40px;
+	}
+	.documents-section__intro{
+		font-size: 18px;
+		line-height: 1.2;
+		margin-top: 15px;
+	}
+	.documents-section__grid{
+		margin-top: 40px;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0;
+		row-gap: 16px;
+		width: calc(100% + 16px);
+		margin-left: -8px;
+		margin-right: -8px;
+	}
+	.documents-section__card{
+		width: calc(100% / 3 - 16px);
+		margin-left: 8px;
+		margin-right: 8px;
+		height: 538px;
+	}
+	.documents-section__card-title{
+		left: 0;
+		bottom: 0;
+		padding: 0 20px 20px 20px;
+		font-size: 20px;
+	}
+	.documents-section__zoom-circle{
+		width: 60px;
+		height: 60px;
+	}
+	.banner-section__content{
+		padding: 40px 40px 40px 40px;
+		row-gap: 30px;
+	}
+	.banner-section__title{
+		font-size: 32px;
+		line-height: 1.2;
+	}
+	.banner-section__description{
+		font-size: 18px;
+		line-height: 1.2;
+	}
+	.banner-section__inner{
+		height: auto;
+		min-height: 400px;
+	}
+	.banner-section__input{
+		width: 200px;
+		height: 50px;
+		padding: 15px 20px;
+		font-size: 16px;
+		line-height: 1.2;
+	}
+	.banner-section__submit{
+		height: 50px;
+		padding: 12px 20px;
+		font-size: 16px;
+		line-height: 1.2;
+	}
+	.banner-section__agreement{
+		gap: 12px;
+		max-width: 500px;
+	}
+	.banner-section__checkbox{
+		width: 16px;
+		height: 19px;
+		margin-top: 1px;
+	}
+	.banner-section__agreement-text{
+		font-size: 11px;
+		line-height: 1.2;
+	}
+	.banner-section__agreement-text a{
+		font-size: 11px;
+		line-height: 1.2;
+	}
+	.banner-section__image-wrap{
+		width: 500px;
+	}
+	.auto-accreditation{
+		padding-bottom: 60px;
+	}
+
+	
+}
+
+@media only screen and (max-width: 1240px) {
+    .auto-accreditation{
+		padding-top: 77px;
+	}
+	.documents-section__heading{
+		font-size: 28px;
+		line-height: 1.2;
+		margin-top: 30px;
+	}
+	.documents-section__intro{
+		font-size: 16px;
+		line-height: 1.2;
+		margin-top: 10px;
+	}
+	.documents-section__grid{
+		margin-top: 30px;
+	}
+	.documents-section__card{
+		height: 405px;
+	}
+	.documents-section__card-title{
+		font-size: 16px;
+		
+	}
+	.banner-section__title{
+	  font-size: 28px;
+	}
+	.banner-section__inner{
+		min-height: 0px;
+	}
+	.banner-section__text{
+		max-width: 600px;
+	}
+}
+
+@media only screen and (max-width: 940px) {
+    .documents-section__heading{
+		font-size: 26px;
+
+	}
+	.documents-section__card{
+		height: 330px;
+	}
+	.documents-section__card-title{
+		font-size: 14px;
+		line-height: 1.2;
+	}
+	.banner-section__content{
+		padding: 30px 30px 30px 30px;
+	}
+	.banner-section__title{
+		font-size: 24px;
+	}
+	.banner-section__description{
+		font-size: 16px;
+	}
+	.banner-section__text{
+		max-width: 500px;
+		row-gap: 15px;
+	}
+	.banner-section__input{
+		width: 180px;
+		height: 40px;
+		padding: 10px 15px;
+		font-size: 14px;
+		line-height: 1.2;
+	}
+	.banner-section__submit{
+		height: 40px;
+		padding: 8px 15px;
+		font-size: 14px;
+		line-height: 1.2;
+	}
+	.banner-section__agreement{
+		gap: 10px;
+		max-width: 400px;
+	}
+	.banner-section__checkbox{
+		width: 14px;
+		height: 17px;
+		margin-top: 0;
+	}
+	.banner-section__agreement-text{
+		font-size: 10px;
+		line-height: 1.2;
+	}
+	.banner-section__agreement-text a{
+		font-size: 10px;
+		line-height: 1.2;
+	}
+	.banner-section__image-wrap{
+		width: 400px;
+	}
+
+	
+}
+
+@media only screen and (max-width: 760px) {
+	.auto-accreditation{
+		padding-top: 65px;
+	}
+	.documents-section__heading{
+		margin-top: 20px;
+		font-size: 24px;
+	}
+	.documents-section__intro{
+		font-size: 14px;
+		line-height: 1.2;
+		margin-top: 10px;
+	}
+	.documents-section__grid{
+	
+	}
+	.documents-section__card{
+		width: calc(50% - 16px);
+	}
+	.documents-section__card{
+		height: 243px;
+	}
+	.documents-section__zoom-circle{
+		width: 40px;
+		height: 40px;
+
+		svg{
+			width: 20px;
+			height: 20px;
+		}
+	}
+	.banner-section__fields{
+		flex-wrap: wrap;
+	}
+	.banner-section__input{
+		width: 100%;
+		height: 40px;
+		padding: 10px 15px;
+		font-size: 14px;
+		line-height: 1.2;
+	}
+	.banner-section__submit{
+		width: 100%;
+		height: 40px;
+		padding: 8px 15px;
+		font-size: 14px;
+		line-height: 1.2;
+	}
+	.banner-section__agreement{
+		gap: 10px;
+		max-width: 100%;
+	}
+	.banner-section__checkbox{
+		width: 14px;
+		height: 17px;
+		margin-top: 0;
+	}
+	.banner-section__description{
+		font-size: 14px;
+	}
+	.auto-accreditation{
+		padding-bottom: 40px;
+	}
+	.banner-section{
+		margin-top: 40px;
+	}
+	.banner-section__image-wrap{
+		right: -38px;
+	}
+}
+
+@media only screen and (max-width: 370px) {
+
+}
