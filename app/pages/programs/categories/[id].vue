@@ -70,7 +70,13 @@
                   {{ currentCategory.subtitle }}
                 </p>
               </div>
-  
+
+              <ProgramsNavMobile
+                :popular-categories="popularCategories"
+                :other-categories="otherCategories"
+                :active-slug="categoryId"
+              />
+
               <form class="programs-main__search-row" @submit.prevent="applySearch">
                 <label class="programs-main__search">
                   <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
