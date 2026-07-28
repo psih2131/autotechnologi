@@ -211,3 +211,205 @@ line-height: 140%;
 color: #3D558F;
 margin-bottom: 60px;
 }
+
+@media only screen and (max-width: 1480px) {
+	.documentation-section__title{
+		font-size: 32px;
+		margin-top: 40px;	
+	}
+	.documentation-section__list{
+		margin-top: 30px;
+		padding-left: 15px;
+		li{
+			font-size: 18px;
+		}
+	}
+	.documentation-section__license{
+		margin-top: 80px;
+	}
+	.documentation-section__license-content{
+		width: calc(100% - 500px);
+		padding-right: 50px;
+	}
+	.documentation-section__license-title{
+		font-size: 24px;
+	}
+	.documentation-section__license-text{
+		font-size: 18px;
+	}
+	.documentation-section__license-note{
+		font-size: 13px;
+	}
+	.documentation-section__slider{
+		width: 500px;
+		gap: 15px;
+	}
+	.documentation-section__slider-prev,
+	.documentation-section__slider-next{
+		width: 41px;
+		height: 41px;
+	}
+	.documentation-section__slide-image{
+		border-radius: 8px;
+	}
+	.documentation-section__slide-zoom-circle{
+		width: 60px;
+		height: 60px;
+	}
+	.documentation-section__slide-zoom{
+		border-radius: 8px;
+	}
+	.documentation-section{
+		padding-bottom: 0;
+	}
+}
+
+@media only screen and (max-width: 1240px) {
+	.documentation-page{
+		padding-top: 77px;
+	}
+	.documentation-section__title{
+		font-size: 28px;
+		margin-top: 30px;
+	}
+	.documentation-section__slider{
+		width: 400px;
+		gap: 10px;
+	}
+	.documentation-section__license-content{
+		width: calc(100% - 400px);
+		padding-right: 30px;
+	}
+	.documentation-section__license-title{
+		font-size: 22px;
+	}
+	.documentation-section__license-text{
+		font-size: 16px;
+	}
+	.documentation-section__license-note{
+		font-size: 12px;
+	}
+	.documentation-section__slide-image{
+		border-radius: 6px;
+	}
+	.documentation-section__slide-zoom-circle{
+		width: 50px;
+		height: 50px;
+	}
+	.documentation-section__slide-zoom{
+		border-radius: 6px;
+	}
+	.documentation-section__slide-zoom-circle{
+		width: 50px;
+		height: 50px;
+	}
+	.documentation-section__slide-zoom-circle{
+		width: 50px;
+		height: 50px;
+	}
+	.documentation-section__slide-zoom-circle{
+		width: 50px;
+		height: 50px;
+	}
+	.documentation-section__slide-zoom-circle{
+		width: 50px;
+		height: 50px;
+	}
+	.documentation-section__slide-zoom-circle{
+		width: 50px;
+		height: 50px;
+	}
+	.documentation-section__slide-zoom-circle{
+		width: 50px;
+	}
+	.documentation-section__license-text-item-quote{
+		margin-bottom: 30px;
+	}
+	.documentation-section__license{
+		margin-top: 60px;
+	}
+}
+
+@media only screen and (max-width: 940px) {
+	.documentation-section__title{
+		font-size: 26px;
+	}
+	.documentation-section__list li{
+		font-size: 16px;
+	}
+	.documentation-section__list{
+		margin-top: 20px;
+	}
+	.documentation-section__license{
+		margin-top: 40px;
+	}
+}
+
+@media only screen and (max-width: 760px) {
+	.documentation-page{
+		padding-top: 65px;
+	}
+	.documentation-section{
+		padding-top: 20px;
+	}
+	.documentation-section__title{
+		font-size: 24px;
+		margin-top: 20px;
+	}
+	.documentation-section__list{
+		margin-top: 15px;
+	}
+	.documentation-section__list li{
+		font-size: 14px;
+	}
+	.documentation-section__license{
+		margin-top: 30px;
+		flex-wrap: wrap;
+	}
+	.documentation-section__license-content{
+		width: 100%;
+		padding-right: 0;
+	}
+	.documentation-section__license-title{
+		font-size: 20px;
+	}
+	.documentation-section__license-text{
+		font-size: 14px;
+	}
+	.documentation-section__license-note{
+		font-size: 11px;
+	}
+	.documentation-section__slider{
+		width: 100%;
+	}
+	.documentation-section__slide-image{
+		border-radius: 4px;
+	}
+	.documentation-section__slide-zoom-circle{
+		width: 40px;
+		height: 40px;
+	}
+	.documentation-section__slide-zoom{
+		border-radius: 4px;
+	}
+	.documentation-section__slide-zoom-circle{
+		width: 40px;
+		height: 40px;
+	}
+	.documentation-section__slide-zoom-circle{
+		width: 40px;
+	}
+	.documentation-section__slider{
+		margin-top: 30px;
+	}
+	.documentation-section{
+		padding-bottom: 20px;
+	}
+	.documentation-page{
+		padding-bottom: 60px;
+	}
+}
+
+@media only screen and (max-width: 370px) {
+
+}
