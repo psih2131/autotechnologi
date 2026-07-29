@@ -73,7 +73,7 @@
 
             <button
               type="button"
-              class="program-reviews__nav"
+              class="program-reviews__nav program-reviews__nav--next"
               aria-label="Следующий слайд"
               @click="swiper.next()"
             >
@@ -172,6 +172,7 @@ const fallbackReviews = [
 
 const containerRef = ref(null)
 const activeSlide = ref(0)
+const perSlide = ref(2)
 
 const resolvedVideos = computed(() =>
   props.videos == null ? fallbackVideos : props.videos,
@@ -184,8 +185,9 @@ const resolvedReviews = computed(() =>
 const reviewSlides = computed(() => {
   const slides = []
   const list = resolvedReviews.value || []
-  for (let i = 0; i < list.length; i += 2) {
-    slides.push(list.slice(i, i + 2))
+  const size = perSlide.value
+  for (let i = 0; i < list.length; i += size) {
+    slides.push(list.slice(i, i + size))
   }
   return slides
 })
@@ -206,6 +208,17 @@ watch(containerRef, (el) => {
 })
 
 watch(reviewSlides, () => {
+  activeSlide.value = 0
   nextTick(() => swiper.reInitialize())
+})
+
+function updatePerSlide() {
+  perSlide.value = window.innerWidth <= 760 ? 1 : 2
+}
+
+onMounted(() => {
+  updatePerSlide()
+  window.addEventListener('resize', updatePerSlide)
+  onUnmounted(() => window.removeEventListener('resize', updatePerSlide))
 })
 </script>

@@ -331,20 +331,53 @@
 	color: #2A272B;
 }
 
-.program-who__grid {
+.program-who__slider {
+	position: relative;
 	margin-top: 40px;
-	display: flex;
-	flex-wrap: wrap;
-	width: calc(100% + 10px);
-	margin-left: -5px;
-	margin-right: -5px;
-	row-gap: 10px;
+}
+
+.program-who__nav {
+	position: absolute;
+	top: 50%;
+	z-index: 2;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 48px;
+	height: 48px;
+	padding: 0;
+	border: none;
+	border-radius: 50%;
+	background: #CFE0FF;
+	cursor: pointer;
+	transform: translateY(-50%);
+	transition: opacity 0.2s;
+}
+
+.program-who__nav--prev {
+	left: -25px;
+}
+
+.program-who__nav--next {
+	right: -25px;
+}
+
+.program-who__nav:hover {
+	opacity: 0.7;
+}
+
+.program-who__swiper {
+	overflow: hidden;
+}
+
+.program-who__slide {
+	width: calc((100% - 50px) / 6);
+	height: auto;
 }
 
 .program-who__card {
 	position: relative;
-	width: calc((100% / 6) - 10px);
-	margin: 0 5px;
+	width: 100%;
 	height: 342px;
 	border-radius: 10px;
 	overflow: hidden;
@@ -910,4 +943,673 @@ a.program-docs__list-item[aria-disabled='true'] {
 
 .program-reviews__dot--active {
 	background: #CFE0FF;
+}
+
+
+@media only screen and (max-width: 1480px) {
+	.program-curriculum{
+		padding-bottom: 80px;
+	}
+	.program-curriculum__title{
+		font-size: 32px;
+		line-height: 1.2;
+	}
+	.program-curriculum__grid{
+		margin-top: 30px;
+		display: flex;
+		flex-wrap: wrap;
+		width: calc(100% + 20px);
+		margin-left: -10px;
+		margin-right: -10px;
+		row-gap: 20px;
+		column-gap: 0;
+		.program-curriculum__block{
+			width: calc((100% / 3) - 20px);
+			margin: 0 10px;
+		}
+	}
+	.program-gallery{
+		display: flex;
+		flex-wrap: wrap;
+		flex-direction: row;
+		width: calc(100% + 10px);
+		margin-left: -5px;
+		margin-right: -5px;
+		row-gap: 10px;
+		column-gap: 0;
+
+		.program-gallery__row{
+			display: contents;
+		}
+		.program-gallery__link{
+			width: calc((100% / 4) - 10px);
+			margin: 0 5px;
+		}
+	}
+	.program-hero__form{
+		width: 480px;
+		padding: 25px;
+	}
+	.program-hero__input{
+		height: 55px;
+		padding: 0 15px;
+		font-size: 16px;
+	}
+	.program-hero__submit{
+		height: 55px;
+		padding: 15px 25px;
+		font-size: 16px;
+	}
+	.program-hero__title{
+		font-size: 32px;
+		line-height: 1.2;
+	}
+	.program-hero__content{
+		width: calc(100% - 480px);
+		padding-right: 40px;
+		max-width: 100%;
+	}
+	.program-hero__description{
+		font-size: 18px;
+		line-height: 1.2;
+	}
+	.program-hero__meta{
+		padding: 15px 25px;
+		font-size: 16px;
+	}
+	.program-hero__body{
+		gap: 0;
+	}
+	.program-hero{
+		min-height: 0;
+	}
+	.program-hero__meta-value{
+		font-size: 16px;
+	}
+	.program-hero__price-row{
+		gap: 10px;
+		padding-top: 20px;
+	}
+	.program-hero__img--left{
+		height: 100%;
+	}
+	.program-hero__img--right{
+		height: 100%;
+	}
+	.program-hero{
+		border-radius: 0 0 30px 30px;
+	}
+	.program-who{
+		padding: 80px 0;
+	}
+	.program-who__title{
+		font-size: 32px;
+		line-height: 1.2;
+	}
+	.program-who__card-text{
+		left: 0;
+		right: 0;
+		width: 100%;
+		padding: 15px;
+		font-size: 16px;
+		height: auto;
+		top: auto;
+		bottom: 0;
+	}
+	.program-who__card{
+		height: 300px;
+	}
+	.program-curriculum__block-title{
+		font-size: 18px;
+		line-height: 1.2;
+	}
+	.program-docs__layout{
+		gap: 0;
+	}
+	.program-docs__image{
+		width: 50%;
+		height: auto;
+	}
+	.program-docs__content{
+		max-width: 100%;
+		width: 50%;
+		padding-left: 60px;
+	}
+	.program-docs__title{
+		font-size: 32px;
+		line-height: 1.2;
+	}
+	.program-docs__text{
+		font-size: 18px;
+		line-height: 1.2;
+	}
+	.program-docs__list{
+		gap: 10px;
+	}
+	.program-docs__item{
+		font-size: 18px;
+		line-height: 1.2;
+	}
+	.program-docs__item-icon{
+		width: 20px;
+		height: 20px;
+	}
+	.program-docs__item-text{
+		font-size: 18px;
+		line-height: 1.2;
+	}
+	.program-docs__item-link{
+		font-size: 18px;
+		line-height: 1.2;
+	}
+	.program-docs__list{
+		margin-top: 40px;
+	}
+	.program-docs{
+		padding-bottom: 80px;
+	}
+	.program-page .banner-section__title{
+		font-size: 32px;
+		line-height: 1.2;
+	}
+	.program-page .banner-section__description{
+		font-size: 18px;
+	}
+	.program-related{
+		padding-top: 80px;
+		padding-bottom: 80px;
+	}
+	.program-related__title{
+		font-size: 32px;
+		line-height: 1.2;
+
+		svg{
+			width: 24px;
+			height: auto;
+			margin-left: 20px;
+		}
+	}
+	.program-about-block__title{
+		font-size: 32px;
+		line-height: 1.2;
+	}
+    .program-about-block__description{
+		font-size: 18px;
+		line-height: 1.2;
+	}
+	.program-about-block__text{
+		width: 50%;
+		padding-right: 50px;
+	}
+	.program-about-block__stats{
+		width: 50%;
+	}
+	.program-about-block__top{
+		gap: 0;
+	}
+	.program-about-block__stat-value{
+		font-size: 60px;
+	}
+	.program-about-block__stat-label{
+		font-size: 16px;
+	}
+	.program-about-block__stats-col{
+		width: calc(50% - 5px);
+		row-gap: 30px;
+	}
+	.program-about{
+		padding-top: 60px;
+		padding-bottom: 80px;
+	}
+	.program-gallery-section{
+		padding-bottom: 80px;
+	}
+	.program-logos-section{
+		padding-bottom: 80px;
+	}
+	.program-logos__slide {
+		height: 60px;
+	}
+	.program-reviews__title{
+		font-size: 32px;
+		line-height: 1.2;
+	}
+	.program-reviews__subtitle{
+		font-size: 18px;
+		line-height: 1.2;
+	}
+	.program-reviews__video-item{
+		height: 340px;
+	}
+	.program-reviews__text{
+		font-size: 16px;
+	}
+	.program-reviews__avatar{
+		width: 80px;
+		height: 80px;
+	}
+	.program-reviews__author-name{
+		font-size: 16px;
+	}
+	.program-reviews__author-city{
+		font-size: 14px;
+	}
+	.program-reviews-section{
+		padding-bottom: 80px;
+	}
+
+}
+
+@media only screen and (max-width: 1240px) {
+	.program-page{
+		padding-top: 77px;
+	}
+	.program-hero__breadcrumbs{
+		font-size: 13px;
+	}
+	.program-hero__form{
+		width: 380px;
+	}
+	.program-hero__form-title{
+		font-size: 20px;
+	}
+	.program-hero__form-text{
+		font-size: 14px;
+	}
+	.program-hero__input{
+		height: 45px;
+		padding: 0 10px;
+		font-size: 14px;
+	}
+	.program-hero__submit{
+		height: 45px;
+		padding: 10px 20px;
+		font-size: 14px;
+	}
+	.program-hero__agreement-text{
+		font-size: 11px;
+	}
+	.program-hero__title{
+		font-size: 28px;
+	}
+	.program-hero__description{
+		font-size: 16px;
+	}
+	.program-hero__content{
+		width: calc(100% - 380px);
+	}
+	.program-hero__meta{
+		margin-top: 30px;
+		gap: 20px;
+	}
+	.program-hero__price-row{
+		margin-top: 30px;
+	}
+	.program-hero__price{
+		font-size: 22px;
+	}
+	.program-who{
+		padding: 60px 0;
+	}
+	.program-who__title{
+		font-size: 28px;
+		line-height: 1.2;
+	}
+	.program-who__slider{
+		margin-top: 30px;
+	}
+	.program-who__slide{
+		width: calc((100% - 40px) / 5);
+	}
+	.program-curriculum__title{
+		font-size: 28px;
+	}
+	.program-curriculum__grid .program-curriculum__block{
+		width: calc(50% - 20px);
+	}
+	.program-curriculum{
+		padding-bottom: 60px;
+	}
+	.program-docs__content{
+		padding-left: 30px;
+	}
+	.program-docs__title{
+		font-size: 28px;
+	}
+	.program-docs__intro{
+		font-size: 16px;
+	}
+	.program-docs__list-text{
+		font-size: 16px;
+	}
+	.program-docs{
+		padding-bottom: 60px;
+	}
+	.program-page .banner-section__title{
+		font-size: 28px;
+	}
+	.program-page .banner-section__description{
+		font-size: 16px;
+	}
+	.program-related{
+		padding-top: 60px;
+		padding-bottom: 60px;
+	}
+	.program-related__title{
+		font-size: 28px;
+	}
+	.program-related__grid {
+		.programs-card{
+			width: calc((100% / 2) - 20px);
+		}
+	}
+	.program-about{
+		padding-top: 60px;
+		padding-bottom: 60px;
+	}
+	.program-about-block__title{
+		font-size: 28px;
+		line-height: 1.2;
+	}
+	.program-about-block__description{
+		font-size: 16px;
+		line-height: 1.2;
+	}
+	.program-about-block__stat-value{
+		font-size: 50px;
+	}
+	.program-gallery .program-gallery__link{
+		width: calc((100% / 3) - 10px);
+	}
+	.program-gallery-section{
+		padding-bottom: 60px;
+	}
+	.program-logos-section{
+		padding-bottom: 60px;
+	}
+	.program-reviews__title{
+		font-size: 28px;
+		line-height: 1.2;
+	}
+	.program-reviews__subtitle{
+		font-size: 16px;
+		line-height: 1.2;
+	}
+	.program-reviews__video-item{
+		height: 300px;
+	}
+	.program-reviews__text{
+		font-size: 14px;
+	}
+	.program-reviews__avatar{
+		width: 60px;
+		height: 60px;
+	}
+	.program-reviews__author-name{
+		font-size: 14px;
+	}
+	.program-reviews__author-city{
+		font-size: 12px;
+	}
+	.program-reviews-section{
+		padding-bottom: 60px;
+	}
+
+}
+
+@media only screen and (max-width: 940px) {
+	.program-hero__body{
+		display: flex;
+		flex-wrap: wrap;
+		flex-direction: row;
+		width: 100%;
+	}
+	.program-hero__content{
+		width: 100%;
+	}
+	.program-hero__form{
+		width: 100%;
+		margin-top: 30px;
+	}
+	.program-hero__title{
+		font-size: 26px;
+	}
+	.program-who__slide{
+		width: calc((100% - 30px) / 4);
+	}
+	.program-hero__content{
+		padding-right: 0;
+	}
+}
+
+@media only screen and (max-width: 760px) {
+	.program-page{
+		padding-top: 65px;
+	}
+	.program-hero__container{
+		padding-top: 20px;
+	}
+
+	.program-hero__body{
+		margin-top: 100px;
+	}
+	.program-hero__title{
+		font-size: 22px;
+	}
+	.program-hero__description{
+		font-size: 14px;
+	}
+	.program-hero__breadcrumbs{
+		font-size: 12px;
+	}
+	.program-hero__meta-divider{
+		display: none;
+	}
+	.program-hero__meta-item{
+		width: 100%;
+		padding: 15px 15px;
+		border-bottom: solid 1px rgba(255, 255, 255, 0.1);
+		&:last-child{
+			border-bottom: none;
+		}
+	}
+	.program-hero__meta{
+		padding: 0;
+		gap: 0;
+	}
+	.program-hero__price{
+		width: 100%;
+		text-align: center;
+	}
+	.program-hero__price-row{
+		justify-content: center;
+	}
+	.program-hero__overlay {
+		position: absolute;
+		inset: 0;
+		background: linear-gradient(
+			0deg,
+			rgba(61, 85, 143, 0) 0%,
+			rgba(61, 85, 143, 1) 16%,
+			rgba(61, 85, 143, 1) 82%,
+			rgba(61, 85, 143, 0) 100%
+		);
+	}
+	.program-hero__img--right{
+		display: none;
+	}
+	.program-hero__img--left{
+		display: block;
+		width: 100%;
+		height: auto;
+		top: 0;
+		bottom: auto;
+	}
+	.program-hero__meta-head{
+		font-size: 13px;
+	}
+	.program-hero__meta-value{
+		font-size: 14px;
+	}
+	.program-hero{
+		border-radius: 0;
+	}
+	.program-hero__container{
+		padding-bottom: 30px;
+	}
+	.program-who__title{
+		font-size: 24px;
+	}
+	.program-who__slide{
+		width: calc((100% - 10px) / 2);
+	}
+	.program-related__grid {
+		width: 100%;
+		margin: 0;
+		margin-top: 30px;
+		.programs-card{
+			width: 100%;
+			margin: 0;
+		}
+	}
+	.program-related__title{
+		font-size: 24px;
+	}
+	.program-page {
+		.banner-section__title{
+			font-size: 24px;
+		}
+	}
+	.program-page .banner-section__description{
+		font-size: 14px;
+	}
+	.program-curriculum__title{
+		font-size: 24px;
+	}
+	.program-curriculum__grid {
+		width: 100%;
+		margin-right: 0;
+		margin-left: 0;
+		.program-curriculum__block{
+			width: 100%;
+			margin: 0;
+		}
+	}
+	.program-docs__layout{
+		flex-wrap: wrap;
+	}
+	.program-docs__image{
+		width: 100%;
+		order: 2;
+	}
+	.program-docs__content{
+		padding: 0;
+		width: 100%;
+		margin-bottom: 30px;
+	}
+	.program-docs__title{
+		font-size: 24px;
+	}
+	.program-docs__list{
+		margin-top: 20px;
+	}
+	.program-about-block__top{
+		flex-wrap: wrap;
+	}
+	.program-about-block__text{
+		width: 100%;
+		padding-right: 0;
+	}
+	.program-about-block__stats{
+		width: 100%;
+		margin-top: 30px;
+	}
+	.program-about-block__title{
+		font-size: 24px;
+	}
+	.program-about-block__stat-value{
+		font-size: 40px;
+	}
+	.program-about-block__stat-label{
+		font-size: 14px;
+	}
+	.program-gallery .program-gallery__link{
+		width: calc((100% / 2) - 10px);
+	}
+	.program-logos__slide{
+		height: 45px;
+	}
+	.program-reviews__title{
+		font-size: 24px;
+	}
+	.program-reviews__subtitle{
+		font-size: 14px;
+	}
+	.program-reviews__videos{
+		flex-wrap: wrap;
+	}
+	.program-reviews__video-item{
+		height: 200px;
+	}
+	.program-reviews__videos{
+		flex-wrap: wrap;
+		display: block;
+		width: 100%;
+
+		
+	}
+	.program-reviews__video-item{
+		width: 100%;
+		margin-bottom: 10px;		border-radius: 10px;
+		overflow: hidden;
+
+		border-radius: 10px;
+
+		&:last-child{
+			margin-bottom: 0;
+		}
+	}
+	.program-reviews__nav-row{
+		position: relative;
+	}
+	.program-reviews__nav{
+		position: absolute;
+		top: auto;
+		bottom: -60px;
+		z-index: 2;
+		
+	}
+	.program-reviews__nav--prev{
+		left: 0;
+	}
+	.program-reviews__nav--next{
+		right: 0;
+	}
+	.program-reviews__swiper{
+		width: 100%;
+		flex: none;
+	}
+
+	.program-who__nav--next{
+		right:0;
+	}
+	.program-who__nav--prev{
+		left:0;
+	}
+	.program-who__nav{
+		top: auto;
+		bottom: -80px;
+	}
+	.program-who{
+		padding-bottom: 100px;
+	}
+	
+	
+
+}
+
+@media only screen and (max-width: 370px) {
+	.program-who__card{
+		height: 250px;
+	}
 }
