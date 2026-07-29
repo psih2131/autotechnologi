@@ -120,6 +120,8 @@ function mapProgram(item) {
   return {
     to: item.slug ? `/programs/${item.slug}` : '/programs',
     category: item.programs_type?.title || item.programs_category?.title || '',
+    categoryIcon: mediaUrl(item.programs_type?.icon) || '',
+    categoryColor: item.programs_type?.color || '',
     title: item.title || '',
     description: item.short_description || '',
     duration: formatDuration(item.duration_of_study_hours),

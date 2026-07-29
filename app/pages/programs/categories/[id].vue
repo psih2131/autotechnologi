@@ -129,9 +129,16 @@
                         type="button"
                         class="programs-main__filter"
                         :class="{ 'programs-main__filter--active': selectedTypeId === type.id && !activeSearch }"
+                        :style="selectedTypeId === type.id && !activeSearch && type.color
+                          ? { color: type.color }
+                          : undefined"
                         @click="selectedTypeId = type.id"
                       >
-                          <span>
+                          <span
+                            :style="selectedTypeId === type.id && !activeSearch && type.color
+                              ? { backgroundColor: type.color }
+                              : undefined"
+                          >
                             <img
                               v-if="type.icon"
                               :src="type.icon"
@@ -213,6 +220,7 @@
                   :to="program.to"
                   :category="program.category"
                   :category-icon="program.categoryIcon"
+                  :category-color="program.categoryColor"
                   :title="program.title"
                   :description="program.description"
                   :duration="program.duration"
@@ -356,6 +364,7 @@ function mapProgram(item) {
     formatId: item.programs_training_format?.documentId || item.programs_training_format?.id || null,
     category: item.programs_type?.title || '',
     categoryIcon: mediaUrl(item.programs_type?.icon) || '',
+    categoryColor: item.programs_type?.color || '',
     title: item.title || '',
     description: item.short_description || '',
     hours: item.duration_of_study_hours == null ? null : Number(item.duration_of_study_hours),
@@ -439,6 +448,7 @@ const programTypes = computed(() =>
       id: item.documentId || item.id,
       title: item.title,
       icon: mediaUrl(item.icon) || '',
+      color: item.color || '',
     })),
 )
 

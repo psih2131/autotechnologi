@@ -784,7 +784,15 @@
 }
 
 .about-support__read-more:hover {
-	opacity: 0.85;
+	
+	span{
+		transform: scale(1.02);
+		transition: all ease 0.3s;
+	}
+	svg{
+		transform: scale(1.1);
+		transition: all ease 0.3s;
+	}
 }
 
 .about-support__read-more span {
@@ -792,6 +800,7 @@
 	font-weight: 500;
 	line-height: 1.4;
 	color: #fff;
+	transition: all ease 0.3s;
 }
 
 .about-support__read-more svg {
@@ -799,9 +808,7 @@
 	transition: transform 0.3s;
 }
 
-.about-support__read-more:hover svg {
-	transform: translateX(10px);
-}
+
 
 .about-support__image-wrap {
 	position: absolute;

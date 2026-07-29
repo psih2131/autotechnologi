@@ -248,6 +248,8 @@
 	justify-content: space-between;
 	transition: box-shadow 0.2s;
 	column-gap: 10px;
+
+
 }
 
 .home-categories__item:hover {
@@ -276,6 +278,12 @@
 	line-height: 1.4;
 	color: rgba(42, 39, 43, 0.5);
 	white-space: nowrap;
+	transition: all ease 0.3s;
+
+	&:hover{
+		background: linear-gradient(90deg, #F7F2DF 0%, #F7F2DF 100%);
+		transition: all ease 0.3s;
+	}
 }
 
 .home-categories__catalog {

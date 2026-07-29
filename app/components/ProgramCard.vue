@@ -2,7 +2,11 @@
   <article class="programs-card">
     <div class="programs-card__header">
       <div class="programs-card__category">
-        <span class="programs-card__category-icon" aria-hidden="true">
+        <span
+          class="programs-card__category-icon"
+          aria-hidden="true"
+          :style="categoryColor ? { backgroundColor: categoryColor } : undefined"
+        >
           <img
             v-if="categoryIcon"
             :src="categoryIcon"
@@ -11,7 +15,10 @@
             height="28"
           >
         </span>
-        <span class="programs-card__category-text">{{ category }}</span>
+        <span
+          class="programs-card__category-text"
+          :style="categoryColor ? { color: categoryColor } : undefined"
+        >{{ category }}</span>
       </div>
 
       <span
@@ -94,6 +101,10 @@ defineProps({
     default: '',
   },
   categoryIcon: {
+    type: String,
+    default: '',
+  },
+  categoryColor: {
     type: String,
     default: '',
   },
