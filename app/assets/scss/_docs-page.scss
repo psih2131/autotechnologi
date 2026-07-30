@@ -78,31 +78,72 @@
 	font-weight: 500;
 }
 
-@media (max-width: 768px) {
-	.docs-page {
-		padding: 40px 0 60px;
-	}
 
-	.docs-page__title {
+
+@media only screen and (max-width: 1480px) {
+	.docs-page__title{
+		font-size: 32px;
+		line-height: 1.2;
+	}
+	.editor-text{
+		p, ul, ol{
+			font-size: 16px;
+		}
+		h2{
+			font-size: 22px;
+		}
+		h3{
+			font-size: 20px;
+		}
+		li{
+			font-size: 16px;
+		}
+	}
+}
+
+@media only screen and (max-width: 1240px) {
+	.docs-page{
+		padding-top: 140px;
+	}
+	.docs-page__title{
 		font-size: 28px;
 	}
-
-	.docs-page__content {
-		margin-top: 24px;
+	.docs-page__content{
+		margin-top: 30px;
 	}
+}
 
-	.editor-text p,
-	.editor-text ul,
-	.editor-text ol {
-		font-size: 16px;
-	}
+@media only screen and (max-width: 940px) {
+	
+}
 
-	.editor-text h2 {
-		margin-top: 32px;
-		font-size: 22px;
+@media only screen and (max-width: 760px) {
+	.docs-page{
+		padding-top: 100px;
+		padding-bottom: 50px;
 	}
+	.docs-page__title{
+		font-size: 24px;
+	}
+	.editor-text{
+		p, ul, ol{
+			font-size: 14px;
+			margin: 0 0 15px;
+		}
+		h2{
+			font-size: 20px;
+			margin: 30px 0 15px;
+		}
+		h3{
+			font-size: 18px;
+			margin: 25px 0 15px;
+		}
+		li{
+			font-size: 14px;
+		}
+	}
+}
 
-	.editor-text h3 {
-		font-size: 20px;
-	}
+@media only screen and (max-width: 370px) {
+
 }

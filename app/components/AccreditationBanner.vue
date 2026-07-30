@@ -10,19 +10,38 @@
             </p>
           </div>
 
-          <form class="banner-section__form" action="#" @submit.prevent>
+          <form class="banner-section__form" action="#" @submit.prevent="submit">
             <div class="banner-section__fields">
-              <input type="text" class="banner-section__input" placeholder="Имя">
-              <input type="tel" class="banner-section__input" placeholder="+7 (900) 900 00 00">
-              <button type="submit" class="banner-section__submit">Оставить заявку</button>
+              <input
+                v-model="name"
+                type="text"
+                class="banner-section__input"
+                placeholder="Имя"
+                autocomplete="name"
+                :disabled="loading"
+              >
+              <input
+                :value="phone"
+                type="tel"
+                class="banner-section__input"
+                placeholder="+7 (900) 900 00 00"
+                autocomplete="tel"
+                :disabled="loading"
+                inputmode="numeric"
+                @keypress="onPhoneKeypress"
+                @input="onPhoneInput"
+              >
+              <button type="submit" class="banner-section__submit" :disabled="!canSubmit">
+                {{ loading ? 'Отправка...' : 'Оставить заявку' }}
+              </button>
             </div>
             <label class="banner-section__agreement">
-              <input type="checkbox" class="banner-section__checkbox">
+              <input v-model="agreed" type="checkbox" class="banner-section__checkbox" :disabled="loading">
               <span class="banner-section__agreement-text">
                 Отправляя форму, я соглашаюсь с
-                <a href="#">Пользовательским соглашением</a>
+                <NuxtLink to="/docs/terms">Пользовательским соглашением</NuxtLink>
                 и даю согласие на обработку персональных данных в соответствии с
-                <a href="#">Политикой конфиденциальности</a>
+                <NuxtLink to="/docs/privacy">Политикой конфиденциальности</NuxtLink>
               </span>
             </label>
           </form>
@@ -57,4 +76,15 @@ const props = defineProps({
 })
 
 const resolvedImage = computed(() => props.image ?? bannerFallback)
+
+const {
+  name,
+  phone,
+  agreed,
+  loading,
+  canSubmit,
+  onPhoneInput,
+  onPhoneKeypress,
+  submit,
+} = useRequestForm()
 </script>

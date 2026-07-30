@@ -16,24 +16,29 @@
       Наши специалисты проконсультируют вас по программам обучения, документам, стоимости и формату обучения, а также помогут подобрать подходящий курс.
     </p>
 
-    <form class="modal-request__form" action="#" @submit.prevent="onSubmit">
+    <form class="modal-request__form" action="#" @submit.prevent="submit">
       <input
         v-model="name"
         type="text"
         class="modal-request__input"
         placeholder="Имя"
         autocomplete="name"
+        :disabled="loading"
       >
       <input
-        v-model="phone"
+        :value="phone"
         type="tel"
         class="modal-request__input"
         placeholder="+7 (900) 900 00 00"
         autocomplete="tel"
+        :disabled="loading"
+        inputmode="numeric"
+        @keypress="onPhoneKeypress"
+        @input="onPhoneInput"
       >
 
       <label class="modal-request__agreement">
-        <input v-model="agreed" type="checkbox" class="modal-request__checkbox">
+        <input v-model="agreed" type="checkbox" class="modal-request__checkbox" :disabled="loading">
         <span class="modal-request__agreement-text">
           Отправляя форму, я соглашаюсь с
           <NuxtLink to="/docs/terms" @click="modalStore.close()">Пользовательским соглашением</NuxtLink>
@@ -42,21 +47,27 @@
         </span>
       </label>
 
-      <button type="submit" class="modal-request__submit">Оставить заявку</button>
+      <button
+        type="submit"
+        class="modal-request__submit"
+        :disabled="!canSubmit"
+      >
+        {{ loading ? 'Отправка...' : 'Оставить заявку' }}
+      </button>
     </form>
   </div>
 </template>
 
 <script setup>
 const modalStore = useModalStore()
-
-const name = ref('')
-const phone = ref('')
-const agreed = ref(false)
-
-function onSubmit() {
-  if (!name.value.trim() || !phone.value.trim() || !agreed.value) return
-  // TODO: отправка заявки
-  modalStore.close()
-}
+const {
+  name,
+  phone,
+  agreed,
+  loading,
+  canSubmit,
+  onPhoneInput,
+  onPhoneKeypress,
+  submit,
+} = useRequestForm()
 </script>

@@ -105,7 +105,7 @@
           </div>
         </div>
 
-        <form class="program-hero__form" action="#" @submit.prevent>
+        <form class="program-hero__form" action="#" @submit.prevent="submit">
           <div class="program-hero__form-head">
             <h2 class="program-hero__form-title">Оставьте заявку на обучение</h2>
             <p class="program-hero__form-text">
@@ -115,21 +115,40 @@
           </div>
 
           <div class="program-hero__form-fields">
-            <input type="text" class="program-hero__input" placeholder="Имя">
-            <input type="tel" class="program-hero__input" placeholder="+7 (900) 900 00 00">
+            <input
+              v-model="name"
+              type="text"
+              class="program-hero__input"
+              placeholder="Имя"
+              autocomplete="name"
+              :disabled="loading"
+            >
+            <input
+              :value="phone"
+              type="tel"
+              class="program-hero__input"
+              placeholder="+7 (900) 900 00 00"
+              autocomplete="tel"
+              :disabled="loading"
+              inputmode="numeric"
+              @keypress="onPhoneKeypress"
+              @input="onPhoneInput"
+            >
           </div>
 
           <label class="program-hero__agreement">
-            <input type="checkbox" class="program-hero__checkbox">
+            <input v-model="agreed" type="checkbox" class="program-hero__checkbox" :disabled="loading">
             <span class="program-hero__agreement-text">
               Отправляя форму, я соглашаюсь с
-              <a href="#">Пользовательским соглашением</a>
+              <NuxtLink to="/docs/terms">Пользовательским соглашением</NuxtLink>
               и даю согласие на обработку персональных данных в соответствии с
-              <a href="#">Политикой конфиденциальности</a>
+              <NuxtLink to="/docs/privacy">Политикой конфиденциальности</NuxtLink>
             </span>
           </label>
 
-          <button type="submit" class="program-hero__submit">Записаться на обучение</button>
+          <button type="submit" class="program-hero__submit" :disabled="!canSubmit">
+            {{ loading ? 'Отправка...' : 'Записаться на обучение' }}
+          </button>
         </form>
       </div>
     </div>
@@ -156,4 +175,15 @@ const props = defineProps({
 
 const resolvedHeroLeft = computed(() => props.heroImgLeft || heroImgLeftFallback)
 const resolvedHeroRight = computed(() => props.heroImgRight || heroImgRightFallback)
+
+const {
+  name,
+  phone,
+  agreed,
+  loading,
+  canSubmit,
+  onPhoneInput,
+  onPhoneKeypress,
+  submit,
+} = useRequestForm()
 </script>

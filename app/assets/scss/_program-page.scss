@@ -314,8 +314,13 @@
 	transition: opacity 0.2s;
 }
 
-.program-hero__submit:hover {
+.program-hero__submit:hover:not(:disabled) {
 	opacity: 0.85;
+}
+
+.program-hero__submit:disabled {
+	opacity: 0.45;
+	cursor: not-allowed;
 }
 
 /* Who */

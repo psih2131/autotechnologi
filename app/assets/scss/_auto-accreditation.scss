@@ -220,8 +220,13 @@
 	transition: opacity 0.2s;
 }
 
-.banner-section__submit:hover {
+.banner-section__submit:hover:not(:disabled) {
 	opacity: 0.85;
+}
+
+.banner-section__submit:disabled {
+	opacity: 0.45;
+	cursor: not-allowed;
 }
 
 .banner-section__agreement {

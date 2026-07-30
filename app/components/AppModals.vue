@@ -7,6 +7,8 @@
         @click.self="modalStore.close()"
       >
         <ModalRequest v-if="modalStore.active === 'request'" />
+        <ModalSuccess v-else-if="modalStore.active === 'success'" />
+        <ModalError v-else-if="modalStore.active === 'error'" />
       </div>
     </Transition>
   </Teleport>
@@ -14,6 +16,8 @@
 
 <script setup>
 import ModalRequest from '~/components/modals/ModalRequest.vue'
+import ModalSuccess from '~/components/modals/ModalSuccess.vue'
+import ModalError from '~/components/modals/ModalError.vue'
 
 const modalStore = useModalStore()
 

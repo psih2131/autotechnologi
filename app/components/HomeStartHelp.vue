@@ -41,19 +41,38 @@
             Специалисты учебного центра помогут разобраться с программами, документами и форматом обучения.
           </p>
         </div>
-        <form class="home-start__cta-form" action="#" @submit.prevent>
+        <form class="home-start__cta-form" action="#" @submit.prevent="submit">
           <div class="home-start__cta-fields">
-            <input type="text" class="home-start__cta-input" placeholder="Имя">
-            <input type="tel" class="home-start__cta-input" placeholder="+7 (900) 900 00 00">
-            <button type="submit" class="home-start__cta-submit">Оставить заявку</button>
+            <input
+              v-model="name"
+              type="text"
+              class="home-start__cta-input"
+              placeholder="Имя"
+              autocomplete="name"
+              :disabled="loading"
+            >
+            <input
+              :value="phone"
+              type="tel"
+              class="home-start__cta-input"
+              placeholder="+7 (900) 900 00 00"
+              autocomplete="tel"
+              :disabled="loading"
+              inputmode="numeric"
+              @keypress="onPhoneKeypress"
+              @input="onPhoneInput"
+            >
+            <button type="submit" class="home-start__cta-submit" :disabled="!canSubmit">
+              {{ loading ? 'Отправка...' : 'Оставить заявку' }}
+            </button>
           </div>
           <label class="home-start__cta-agreement">
-            <input type="checkbox" class="home-start__cta-checkbox">
+            <input v-model="agreed" type="checkbox" class="home-start__cta-checkbox" :disabled="loading">
             <span class="home-start__cta-agreement-text">
               Отправляя форму, я соглашаюсь с
-              <a href="#">Пользовательским соглашением</a>
+              <NuxtLink to="/docs/terms">Пользовательским соглашением</NuxtLink>
               и даю согласие на обработку персональных данных в соответствии с
-              <a href="#">Политикой конфиденциальности</a>
+              <NuxtLink to="/docs/privacy">Политикой конфиденциальности</NuxtLink>
             </span>
           </label>
         </form>
@@ -78,4 +97,14 @@ defineProps({
 })
 
 const modalStore = useModalStore()
+const {
+  name,
+  phone,
+  agreed,
+  loading,
+  canSubmit,
+  onPhoneInput,
+  onPhoneKeypress,
+  submit,
+} = useRequestForm()
 </script>
