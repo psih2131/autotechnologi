@@ -9,10 +9,32 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   ssr: true,
   css: ['~/assets/scss/main.scss'],
-  modules: ['@pinia/nuxt', 'nuxt-swiper'],
+  modules: ['@pinia/nuxt', 'nuxt-swiper', 'vue-yandex-maps/nuxt'],
 
   pinia: {
     storesDirs: ['./stores'],
+  },
+  
+  yandexMaps: {
+    apikey: 'af5a38a2-5bf8-44de-bfbe-b30e278e9df4',
+    // грузим скрипт только когда монтируется карта — не ломает гидрацию при ошибке ключа
+    initializeOn: 'onComponentMount',
+    lang: 'ru_RU',
+  },
+
+  build: {
+    transpile: ['vue-yandex-maps'],
+  },
+
+  typescript: {
+    tsConfig: {
+      compilerOptions: {
+        typeRoots: [
+          './node_modules/@types',
+          './node_modules/@yandex/ymaps3-types',
+        ],
+      },
+    },
   },
 
   runtimeConfig: {

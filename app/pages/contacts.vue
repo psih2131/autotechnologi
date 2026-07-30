@@ -59,7 +59,9 @@
           </div>
         </div>
 
-        <div class="contacts-section__map" aria-hidden="true"></div>
+        <div class="contacts-section__map" aria-hidden="true">
+          <MapAbout :map-data="mapData" />
+        </div>
       </div>
     </section>
 
@@ -73,8 +75,10 @@
 </template>
 
 <script setup>
+import MapAbout from '../components/maps/MapAbout.vue';
 const config = useRuntimeConfig()
 const mediaUrl = useStrapiMedia()
+const { normalizeMap } = useStrapiMap()
 
 const query = new URLSearchParams({
   'populate[sales_departments][populate]': 'icon',
@@ -82,6 +86,7 @@ const query = new URLSearchParams({
   'populate[representative_offices][populate]': 'icon',
   'populate[socials_media][populate]': 'icon',
   'populate[banner_section][populate]': 'image',
+  'populate[map][populate]': '*',
   'populate[Seo][populate][shareImage]': 'true',
   'populate[Seo][populate][twitterImage]': 'true',
 }).toString()
@@ -91,6 +96,7 @@ const { data } = await useAsyncData('page-contact', () =>
 )
 
 const page = computed(() => data.value?.data ?? {})
+const mapData = computed(() => normalizeMap(page.value.map))
 
 function normalizeItems(items) {
   if (!items?.length) return []

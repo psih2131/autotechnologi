@@ -19,6 +19,7 @@
       v-if="offices"
       :title="offices.title"
       :branches="offices.branches"
+      :map-data="offices.mapData"
     />
     <AboutWhy v-if="whySection" v-bind="whySection" />
     <AboutVideo v-if="videoSrc" :src="videoSrc" />
@@ -65,6 +66,7 @@
 <script setup>
 const config = useRuntimeConfig()
 const mediaUrl = useStrapiMedia()
+const { normalizeMap } = useStrapiMap()
 
 function toYoutubeEmbed(code) {
   if (!code) return ''
@@ -84,7 +86,7 @@ const query = new URLSearchParams({
   'populate[hero_section][populate][image_2]': 'true',
   'populate[About_company_section][populate]': 'about_item',
   'populate[gallery_section]': 'true',
-  'populate[Offices_section]': 'true',
+  'populate[Offices_section][populate][map][populate]': '*',
   'populate[Why_we_section][populate]': 'box_1_images',
   'populate[regulation_section][populate][regulation_items][populate]': 'image',
   'populate[licence_section][populate]': 'gallery',
@@ -158,10 +160,12 @@ const offices = computed(() => {
     { city: section.office_2_title || '', address: section.office_2_adres || '' },
     { city: section.office_3_title || '', address: section.office_3_adres || '' },
   ].filter((item) => item.city || item.address)
-  if (!section.title && !branches.length) return null
+  const mapData = normalizeMap(section.map)
+  if (!section.title && !branches.length && !mapData.center) return null
   return {
     title: section.title || '',
     branches,
+    mapData,
   }
 })
 
