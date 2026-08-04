@@ -127,14 +127,17 @@ const markers = computed(() => {
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  transform: translateY(-100%);
+  width: 1px;
+  height: 1px;
+
 }
 
 .map-about__marker-icon {
   display: block;
   width: 40px;
-  height: 40px;
-  object-fit: contain;
+  height: auto;
+  position: absolute;
+  bottom: 0;
 }
 
 .map-about__marker-pin {

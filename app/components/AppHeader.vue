@@ -6,7 +6,6 @@
           <NuxtLink to="/" class="header__logo">
             <img :src="logoSrc" alt="Автотехнологии — центр дистанционного образования">
           </NuxtLink>
-          adasdsad
 
           <form
             ref="searchRoot"

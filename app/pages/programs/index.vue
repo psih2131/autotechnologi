@@ -64,9 +64,9 @@
 
             <div class="programs-main__head">
               <h1 v-if="pageTitle" class="programs-main__title">{{ pageTitle }}</h1>
-              <p v-if="pageSubtitle" class="programs-main__description">
+              <!-- <p v-if="pageSubtitle" class="programs-main__description">
                 {{ pageSubtitle }}
-              </p>
+              </p> -->
             </div>
 
             <ProgramsNavMobile

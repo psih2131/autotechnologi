@@ -322,6 +322,16 @@
 	flex-wrap: wrap;
 	gap: 40px;
 	padding-bottom: 18px;
+	position: relative;
+	&::before{
+		content: '';
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		width: 100%;
+		height: 1px;
+		background: #CCCCCC;
+	}
 }
 
 .programs-main__filters-wrapper::-webkit-scrollbar {
@@ -364,6 +374,7 @@
 	white-space: nowrap;
 	cursor: pointer;
 	transition: color 0.2s;
+	position: relative;
 
 	span{
 		display: flex;
@@ -376,6 +387,17 @@
 		color: #fff;
 	}
 
+	&::before{
+		content: '';
+		position: absolute;
+		bottom: -18px;
+		left: 0;
+		width: 100%;
+		height: 3px;
+		transition: all ease 0.3s;
+		background: none;
+	}
+
 	
 }
 
@@ -386,10 +408,15 @@
 	object-fit: contain;
 }
 .programs-main__filter--active{
+	position: relative;
 	span{
 		background: #2A272B;
 	}
 	color: #2A272B;
+	
+    &::before{
+		background: currentColor;
+	}
 }
 
 .programs-main__filter:hover {
