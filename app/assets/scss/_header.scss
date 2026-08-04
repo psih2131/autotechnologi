@@ -1,10 +1,31 @@
 .header {
 	background: #fff;
+	z-index: 100;
+	position: fixed;
+	width: 100%;
+	left: 0;
+	top: 0;
+	padding-bottom: 106px;
+	transition: all ease 0.3s;
+
+	&--active{
+		padding-bottom: 0;
+		.header__bottom{
+			
+			transform: translateY(-100%);
+		}
+	}
 }
+
+
 
 .header__top {
 	padding: 23px 0;
+	background: #fff;
+	position: relative;
+	z-index: 2;
 }
+
 
 .header__top-inner {
 	display: flex;
@@ -182,6 +203,11 @@
 
 .header__bottom {
 	padding: 11px 0 33px;
+	position: absolute;
+	width: 100%;
+	z-index: 1;
+	transition: all ease 0.3s;
+	bottom: 0;
 }
 
 .header__bottom-inner {
@@ -241,6 +267,12 @@
 
 
 @media only screen and (max-width: 1480px) {
+	.header {
+		padding-bottom: 81px;
+		&--active{
+			padding-bottom: 0;
+		}
+	}
 	.header__top{
 		padding: 15px 0;
 	}
@@ -278,6 +310,12 @@
 }
 
 @media only screen and (max-width: 1240px) {
+	.header {
+		padding-bottom: 0;
+		&--active{
+			padding-bottom: 0;
+		}
+	}
 	.header__bottom{
 		display: none;
 	}

@@ -134,7 +134,7 @@ const markers = computed(() => {
 
 .map-about__marker-icon {
   display: block;
-  width: 40px;
+  width: 50px;
   height: auto;
   position: absolute;
   bottom: 0;

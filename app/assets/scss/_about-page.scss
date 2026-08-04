@@ -1573,7 +1573,28 @@
 	.about-why__main{
 		padding-right: 0;
 	}
+	.about-why__avatar{
+		margin-left: -35px;
+	}
 	
+}
+@media only screen and (max-width: 440px) {
+	.about-support__content{
+		max-width: 100%;
+		padding-left: 25px;
+		padding-right: 25px;
+	}
+	.about-why__programs-head{
+		column-gap: 0;
+	}
+}
+
+@media only screen and (max-width: 385px) {
+	.about-support__content{
+		max-width: 100%;
+		padding-left: 20px;
+		padding-right: 20px;
+	}
 }
 
 @media only screen and (max-width: 370px) {

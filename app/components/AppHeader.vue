@@ -1,5 +1,5 @@
 <template>
-  <header class="header">
+  <header class="header" :class="{ 'header--active': isHeaderActive }">
     <div class="header__top">
       <div class="container">
         <div class="header__top-inner">
@@ -269,6 +269,11 @@ const mediaUrl = useStrapiMedia()
 const router = useRouter()
 const modalStore = useModalStore()
 const isMenuOpen = ref(false)
+const isHeaderActive = ref(false)
+
+function onWindowScroll() {
+  isHeaderActive.value = window.scrollY > 100
+}
 
 const headerQuery = new URLSearchParams({
   'populate[logo]': 'true',
@@ -397,10 +402,13 @@ function onDocumentClick(event) {
 
 onMounted(() => {
   document.addEventListener('click', onDocumentClick)
+  window.addEventListener('scroll', onWindowScroll, { passive: true })
+  onWindowScroll()
 })
 
 onBeforeUnmount(() => {
   document.removeEventListener('click', onDocumentClick)
+  window.removeEventListener('scroll', onWindowScroll)
   clearTimeout(debounceTimer)
 })
 </script>
